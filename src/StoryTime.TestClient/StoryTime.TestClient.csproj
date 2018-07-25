@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StoryTime.Parser\StoryTime.Parser.csproj" />
+    <ProjectReference Include="..\Parser\Parser.csproj" />
   </ItemGroup>
 
 </Project>

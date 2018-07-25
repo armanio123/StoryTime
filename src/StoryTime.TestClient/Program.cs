@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using StoryTime.Parser;
+using Parser;
 using System.IO;
 
 namespace StoryTime.TestClient

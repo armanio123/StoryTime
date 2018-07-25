@@ -7,6 +7,7 @@ namespace Parser.Entities
     {
         None = 0,
         AddOrHave = 1,
-        RemoveOrDontHave = 2
+        RemoveOrDontHave = 2,
+        Set = 3
     }
 }

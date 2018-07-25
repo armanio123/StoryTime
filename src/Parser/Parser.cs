@@ -13,7 +13,7 @@ namespace Parser
     public class MarkdownStoryParser
     {
         private static readonly string statKeyPattern = @"^ *?([^: ]+) *?:"; // Group 1 = key name.
-        private static readonly string counterStatPattern = $@"{statKeyPattern} *?([-+]?\d+) *?$"; // Group 1 = key name. Group 2 = Value, including sign. 
+        private static readonly string counterStatPattern = $@"{statKeyPattern} *?([-+])?(\d+) *?$"; // Group 1 = key name. Group 2 = Sign, Group 3 = Value. 
         private static readonly string flagStatPattern = $@"{statKeyPattern} *?([-+])?(\[.+\]) *?$"; // Group 1 = key name. Group 2 = Sign, Group 3 = Array.
 
         private readonly Regex counterStatRegex = new Regex(counterStatPattern, RegexOptions.IgnoreCase);
@@ -138,7 +138,7 @@ namespace Parser
 
                 string content = GetBlockContent(paragraphBlock);
 
-                var (key, value) = GetStat(content);
+                var (key, value, _) = GetStat(content);
 
                 stats.Add(key, value);
             }
@@ -204,30 +204,25 @@ namespace Parser
             {
                 string content = GetBlockContent(paragraphBlock);
 
-                if (TryGetCounterState(content, out string key, out dynamic value, out EffectType effectType) || TryGetFlagStat(content, out key, out value, out effectType))
+                (string key, dynamic value, EffectType effectType) = GetStat(content);
+
+                if (paragraphBlock.Inline.FirstChild is EmphasisInline) // Is a Condition
                 {
-                    if (paragraphBlock.Inline.FirstChild is EmphasisInline) // Is a Condition
+                    conditions.Add(new StatEffect
                     {
-                        conditions.Add(new StatEffect
-                        {
-                            EffectType = effectType,
-                            Key = key,
-                            Value = value
-                        });
-                    }
-                    else
-                    {
-                        effects.Add(new StatEffect
-                        {
-                            EffectType = effectType,
-                            Key = key,
-                            Value = value
-                        });
-                    }
+                        EffectType = effectType,
+                        Key = key,
+                        Value = value
+                    });
                 }
                 else
                 {
-                    throw new Exception("Error when parsing an Stat Effect.");
+                    effects.Add(new StatEffect
+                    {
+                        EffectType = effectType,
+                        Key = key,
+                        Value = value
+                    });
                 }
             }
 
@@ -245,14 +240,14 @@ namespace Parser
             }
         }
 
-        private (string key, dynamic value) GetStat(string content)
+        private (string key, dynamic value, EffectType effectType) GetStat(string content)
         {
-            if (TryGetCounterState(content, out string key, out dynamic value, out EffectType _) || TryGetFlagStat(content, out key, out value, out _))
+            if (TryGetCounterStat(content, out string key, out dynamic value, out EffectType effectType) || TryGetFlagStat(content, out key, out value, out effectType))
             {
-                return (key, value);
+                return (key, value, effectType);
             }
 
-            throw new Exception("Unable to parse the Stats.");
+            throw new Exception("Unable to parse Stat.");
         }
 
         private bool TryGetFlagStat(string content, out string key, out dynamic value, out EffectType effectType)
@@ -266,13 +261,13 @@ namespace Parser
             {
                 key = match.Groups[1].Value;
                 value = JsonConvert.DeserializeObject<string[]>(match.Groups[3].Value);
-                effectType = match.Groups[2].Value == "-" ? EffectType.RemoveOrDontHave : EffectType.AddOrHave;
+                effectType = GetEffectType(match.Groups[2].Value);
             }
 
             return match.Success;
         }
 
-        private bool TryGetCounterState(string content, out string key, out dynamic value, out EffectType effectType)
+        private bool TryGetCounterStat(string content, out string key, out dynamic value, out EffectType effectType)
         {
             key = null;
             value = null;
@@ -283,11 +278,26 @@ namespace Parser
             if (match.Success)
             {
                 key = match.Groups[1].Value;
-                value = int.Parse(match.Groups[2].Value);
-                effectType = value < 0 ? EffectType.RemoveOrDontHave : EffectType.AddOrHave;
+                value = int.Parse(match.Groups[3].Value);
+                effectType = GetEffectType(match.Groups[2].Value);
             }
 
             return match.Success;
+        }
+
+        private EffectType GetEffectType(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return EffectType.Set;
+            }
+
+            switch (value)
+            {
+                case "+": return EffectType.AddOrHave;
+                case "-": return EffectType.RemoveOrDontHave;
+                default: return EffectType.None; // TODO: Validate invalid characters instead.
+            }
         }
 
         private string GetBlockContent(Block block)
