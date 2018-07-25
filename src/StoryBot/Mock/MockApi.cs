@@ -1,5 +1,8 @@
-﻿using Parser.Entities;
+﻿using Parser;
+using Parser.Entities;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace StoryBot.Mock
@@ -10,8 +13,10 @@ namespace StoryBot.Mock
 
         public MockApi()
         {
-            // TODO replace with parser
-            story = new Story();
+            var file = File.OpenText("../../../../../stories/sample.md");
+
+            var parser = new MarkdownStoryParser();
+            story = parser.Parse(file.ReadToEnd());
         }
 
         public Section GetStartingSection()
