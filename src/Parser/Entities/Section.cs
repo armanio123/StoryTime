@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Parser.Entities
 {
+    [Serializable]
     public class Section
     {
         public string Key { get; set; }

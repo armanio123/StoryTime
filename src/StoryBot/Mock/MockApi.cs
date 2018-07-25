@@ -1,13 +1,12 @@
-﻿using System;
+﻿using Parser.Entities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace StoryBot.Mock
 {
     public class MockApi
     {
-        Story story;
+        private Story story;
 
         public MockApi()
         {

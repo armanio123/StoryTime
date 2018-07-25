@@ -78,7 +78,7 @@ namespace Parser
                                 Text = content
                             };
 
-                            if (!sections.TryAdd(headingContent, section))
+                            if (!TryAddDictionary(sections, headingContent, section))
                             {
                                 throw new Exception("Section title already found. Use a different name.");
                             }
@@ -93,6 +93,18 @@ namespace Parser
                 Stats = stats,
                 Title = title
             };
+        }
+
+        private bool TryAddDictionary<TKey, TValue>(Dictionary<TKey, TValue> dictionary, TKey key, TValue value)
+        {
+            if (dictionary.ContainsKey(key))
+            {
+                return false;
+            }
+
+            dictionary.Add(key, value);
+
+            return true;
         }
 
         private IEnumerable<string> ParseContent(MarkdownDocument markdownDocument, int i)
@@ -226,7 +238,7 @@ namespace Parser
         {
             foreach (var keyValuePair in newStats)
             {
-                if (!stats.TryAdd(keyValuePair.Key, keyValuePair.Value))
+                if (!TryAddDictionary(stats, keyValuePair.Key, keyValuePair.Value))
                 {
                     throw new Exception("Error parsing the Stats. The Stat name already exists.");
                 }

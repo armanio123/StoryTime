@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Parser.Entities
 {
+    [Serializable]
     public class Story
     {
         public Dictionary<string, Section> Sections { get; set; }

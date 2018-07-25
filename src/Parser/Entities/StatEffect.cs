@@ -1,5 +1,8 @@
-﻿namespace Parser.Entities
+﻿using System;
+
+namespace Parser.Entities
 {
+    [Serializable]
     public class StatEffect
     {
         public string Key { get; set; }

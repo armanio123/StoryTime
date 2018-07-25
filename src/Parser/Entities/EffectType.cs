@@ -1,5 +1,8 @@
-﻿namespace Parser.Entities
+﻿using System;
+
+namespace Parser.Entities
 {
+    [Serializable]
     public enum EffectType
     {
         None = 0,

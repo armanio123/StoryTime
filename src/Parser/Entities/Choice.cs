@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Parser.Entities
 {
+    [Serializable]
     public class Choice
     {
         public IEnumerable<StatEffect> Conditions { get; set; }

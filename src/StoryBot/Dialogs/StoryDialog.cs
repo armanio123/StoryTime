@@ -1,20 +1,17 @@
 ﻿using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
-using Newtonsoft.Json;
+using Parser.Entities;
 using StoryBot.Mock;
-using StoryBot.Models.StoryTime.Shared;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace StoryBot.Dialogs
 {
     [Serializable]
     public class StoryDialog : IDialog<object>
     {
-        Section storySection = null;
+        private Section storySection = null;
 
         public async Task StartAsync(IDialogContext context)
         {
@@ -57,7 +54,7 @@ namespace StoryBot.Dialogs
 
             UpdateState(stats, null);
 
-            userData.SetProperty<Dictionary<string,dynamic>>("Stats", stats);
+            userData.SetProperty<Dictionary<string, dynamic>>("Stats", stats);
 
             userData.SetProperty<string>("StoryNode", storySection.Key);
             stateClient.BotState.SetUserData(activity.ChannelId, activity.From.Id, userData);
@@ -68,20 +65,20 @@ namespace StoryBot.Dialogs
             {
                 reply = activity.CreateReply(storySection.Text);
 
-                reply.Speak = BuildSpeakText(storySection.Text, storySection.Actions);
+                reply.Speak = BuildSpeakText(storySection.Text, storySection.Choices);
 
                 List<CardAction> cardButtons = new List<CardAction>();
 
-                if (storySection.Actions != null)
+                if (storySection.Choices != null)
                 {
-                    foreach (var action in storySection.Actions)
+                    foreach (var choice in storySection.Choices)
                     {
                         cardButtons.Add(new CardAction()
                         {
-                            Title = action.Text,
-                            Text = action.Text,
-                            DisplayText = action.Text,
-                            Value = action.SectionKey,
+                            Title = choice.Text,
+                            Text = choice.Text,
+                            DisplayText = choice.Text,
+                            Value = choice.SectionKey,
                             Type = ActionTypes.PostBack
                         });
                     }
@@ -116,13 +113,13 @@ namespace StoryBot.Dialogs
             context.Wait(MessageReceivedAsync);
         }
 
-        string BuildSpeakText(string text, IEnumerable<Models.StoryTime.Shared.Action> actions)
+        private string BuildSpeakText(string text, IEnumerable<Choice> choices)
         {
             string result = text;
-            if (actions != null)
+            if (choices != null)
             {
                 int count = 1;
-                foreach (var option in actions)
+                foreach (var option in choices)
                 {
                     result += string.Format(" {0}) {1}", count, option);
                     count++;
@@ -132,7 +129,7 @@ namespace StoryBot.Dialogs
             return result;
         }
 
-        void UpdateState(Dictionary<string, dynamic> state, IEnumerable<StatEffect> effects)
+        private void UpdateState(Dictionary<string, dynamic> state, IEnumerable<StatEffect> effects)
         {
 
         }
