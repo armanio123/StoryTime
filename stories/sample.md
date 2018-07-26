@@ -1,4 +1,5 @@
 # The Cave
+by Armando Aguirre and Hector Arriaga
 
 ## Stats
 * hp: 10

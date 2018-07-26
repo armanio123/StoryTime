@@ -23,14 +23,17 @@ namespace Parser
         {
             var markdownDocument = Markdown.Parse(markdownString);
 
-            return ParseStory(markdownDocument);
+            return Parse(markdownDocument);
         }
 
-        public Story ParseStory(MarkdownDocument markdownDocument)
+        public Story Parse(MarkdownDocument markdownDocument)
         {
-            string title = null;
-            var stats = new Dictionary<string, dynamic>();
-            var sections = new Dictionary<string, Section>();
+            Story story = new Story
+            {
+                Sections = new Dictionary<string, Section>(),
+                Stats = new Dictionary<string, dynamic>(),
+                Title = null
+            };
 
             for (int i = 0; i < markdownDocument.Count; i++)
             {
@@ -46,22 +49,34 @@ namespace Parser
                     // Heading 1 is reserverd for Title
                     case 1:
                         // TODO: Validate if more than on title is found.
-                        title = title ?? headingContent;
+                        story.Title = story.Title ?? headingContent;
+
+                        string author = GetBlockContent(markdownDocument, i + 1);
+
+                        if ( author == null )
+                        {
+                            story.Author = "by Anonymous";
+                        }
+                        else
+                        {
+                            story.Author = author;
+                            i++;
+                        }
+
                         break;
                     // Either Stats or Content regardless of heading
                     default:
                         bool isStats = string.Equals("stats", headingContent, StringComparison.OrdinalIgnoreCase);
 
+                        i++;
+
                         if (isStats)
                         {
                             // TODO: Validate if the stats are already found.
-                            i++;
-                            AddStats(stats, ParseStats(markdownDocument, i));
+                            AddStats(story.Stats, ParseStats(markdownDocument, i));
                         }
                         else
                         {
-                            i++;
-
                             var paragraphs = ParseContent(markdownDocument, i);
                             var content = string.Join(string.Empty, paragraphs);
 
@@ -78,7 +93,7 @@ namespace Parser
                                 Text = content
                             };
 
-                            if (!TryAddDictionary(sections, headingContent, section))
+                            if (!TryAddDictionary(story.Sections, headingContent, section))
                             {
                                 throw new Exception("Section title already found. Use a different name.");
                             }
@@ -87,12 +102,7 @@ namespace Parser
                 }
             }
 
-            return new Story
-            {
-                Sections = sections,
-                Stats = stats,
-                Title = title
-            };
+            return story;
         }
 
         private bool TryAddDictionary<TKey, TValue>(Dictionary<TKey, TValue> dictionary, TKey key, TValue value)
@@ -298,6 +308,16 @@ namespace Parser
                 case "-": return EffectType.RemoveOrDontHave;
                 default: return EffectType.None; // TODO: Validate invalid characters instead.
             }
+        }
+
+        private string GetBlockContent(MarkdownDocument markdownDocument, int i)
+        {
+            if(markdownDocument.Count() > i)
+            {
+                return GetBlockContent(markdownDocument[i]);
+            }
+
+            return null;
         }
 
         private string GetBlockContent(Block block)

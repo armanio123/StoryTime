@@ -11,5 +11,7 @@ namespace Parser.Entities
         public Dictionary<string, dynamic> Stats { get; set; }
 
         public string Title { get; set; }
+
+        public string Author { get; set; }
     }
 }
