@@ -6,6 +6,7 @@ using Parser.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Parser
@@ -74,7 +75,7 @@ namespace Parser
                         else
                         {
                             var paragraphs = ParseContent(markdownDocument, nextBlockIndex);
-                            var content = string.Join(string.Empty, paragraphs);
+                            string content = CleanContent(paragraphs);
 
                             var choices = ParseChoices(markdownDocument, nextBlockIndex + paragraphs.Count() + 1);
 
@@ -95,6 +96,25 @@ namespace Parser
             }
 
             return story;
+        }
+
+        private string CleanContent(IEnumerable<string> texts)
+        {
+            string dirty = string.Join(" ", texts);
+
+            return CleanContent(dirty);
+
+        }
+
+        private string CleanContent(string text)
+        {
+            if(string.IsNullOrWhiteSpace(text))
+            {
+                return string.Empty;
+            }
+
+            string result = text.Trim();
+            return result.Last() == '.' ? result : result + '.';
         }
 
         private bool TryAddDictionary<TKey, TValue>(Dictionary<TKey, TValue> dictionary, TKey key, TValue value)
@@ -152,12 +172,7 @@ namespace Parser
         {
             var choices = new List<Choice>();
 
-            if (markdownDocument.Count() < index)
-            {
-                return choices;
-            }
-
-            if (!(markdownDocument[index] is ListBlock listBlock))
+            if (markdownDocument.Count() < index || !(markdownDocument[index] is ListBlock listBlock))
             {
                 return choices;
             }
@@ -177,7 +192,8 @@ namespace Parser
                 throw new Exception("Unable to parse the Choice. No text found.");
             }
 
-            string text = GetBlockContent(paragraphBlock);
+            string text = CleanContent(GetBlockContent(paragraphBlock));
+
             string sectionKey = paragraphBlock.Inline.Descendants<LinkInline>().FirstOrDefault().Url;
 
             var (conditions, effects) = ParseStatEffects(listItemBlock);
@@ -320,7 +336,8 @@ namespace Parser
             }
             if (block is ParagraphBlock paragraphBlock)
             {
-                return string.Join(" ", paragraphBlock.Inline.Descendants<LiteralInline>().Select(x => x.Content.ToString()));
+                // Parsing flags stats are separated by the parser on different indexes. Hence the need to join.
+                return string.Join(string.Empty, paragraphBlock.Inline.Descendants<LiteralInline>().Select(x => x.Content.ToString()));
             }
 
             return null;
