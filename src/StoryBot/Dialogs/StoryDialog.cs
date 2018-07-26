@@ -178,22 +178,29 @@ namespace StoryBot.Dialogs
 
         private Choice MatchActivityValueToChoice(Dictionary<string, dynamic> state, Section storySection, string activityValue)
         {
+            List<Choice> availableChoices = new List<Choice>();
+
             foreach (var choice in storySection.Choices)
             {
-                if (IsChoicePossible(state, choice.Conditions))
+                if(IsChoicePossible(state, choice.Conditions))
                 {
-                    if (choice.SectionKey.ToLower() == activityValue || choice.Text.ToLower() == activityValue || choice.Text.ToLower() == activityValue + ".")
-                    {
-                        return choice;
-                    }
+                    availableChoices.Add(choice);
+                }
+            }
+
+            foreach(var choice in availableChoices)
+            {
+                if (choice.SectionKey.ToLower() == activityValue || choice.Text.ToLower() == activityValue || choice.Text.ToLower() == activityValue + ".")
+                {
+                    return choice;
                 }
             }
 
             int choiceIndex = ChoiceKeyEquivalents.GetChoiceKeyMatch(activityValue);
 
-            if (choiceIndex > -1 && choiceIndex < storySection.Choices.Count())
+            if (choiceIndex > -1 && choiceIndex < availableChoices.Count())
             {
-                return storySection.Choices.ElementAt(choiceIndex);
+                return availableChoices.ElementAt(choiceIndex);
             }
 
             return null;
