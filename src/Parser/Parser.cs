@@ -100,7 +100,7 @@ namespace Parser
 
         private string CleanContent(IEnumerable<string> texts)
         {
-            string dirty = string.Join(" ", texts);
+            string dirty = string.Join("\n", texts);
 
             return CleanContent(dirty);
 
