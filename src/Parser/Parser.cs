@@ -213,7 +213,7 @@ namespace Parser
             var effects = new List<StatEffect>();
 
             // No effects or conditions.
-            if (listItemBlock.Count < 1 || !(listItemBlock[0] is ListBlock listBlock))
+            if (listItemBlock.Count < 2 || !(listItemBlock[1] is ListBlock listBlock))
             {
                 return (conditions, effects);
             }
