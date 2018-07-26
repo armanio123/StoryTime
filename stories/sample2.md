@@ -2,7 +2,7 @@
 by Marlen Lopez
 
 ## #0
-It's year 2123, it has been 10 years since humanity has suffered from spaceship attacks from an unkown enemy. They have launch several kind of attacks, starting with internet, no radio signals, water and food is scarce. They have been taking Earth to eliminate humanity, but nobody have seen who they are.
+It's year 2123, it has been 10 years since humanity has suffered from spaceship attacks from an unknown enemy. They have launch several kind of attacks, starting with internet, no radio signals, water and food is scarce. They have been taking Earth to eliminate humanity, but nobody have seen who they are.
 
 The military, desperate to defeat this enemy, has started recruiting people from 14 to 18 years, to train and stop the strangers. You have been selected for this.
 
