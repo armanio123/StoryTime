@@ -18,10 +18,10 @@ namespace StoryBot.Dialogs
         private Dictionary<string, dynamic> stats = null;
         MockApi api;
 
-        //public StoryDialog(ref MockApi api)
-        //{
-        //    this.api = api;
-        //}
+        public StoryDialog(ref MockApi api)
+        {
+            this.api = api;
+        }
 
         public async Task StartAsync(IDialogContext context)
         {
