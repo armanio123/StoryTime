@@ -37,11 +37,11 @@ namespace StoryBot.Dialogs
             {
                 case "continue":
                     activity.Text = "_continue_";
-                    await context.Forward(new Dialogs.StoryDialog(/*ref api*/), this.ResumeAfterNewOrderDialog, activity, CancellationToken.None);
+                    await context.Forward(new Dialogs.StoryDialog(ref api), this.ResumeAfterNewOrderDialog, activity, CancellationToken.None);
                     break;
                 case "start new story":
                     activity.Text = "_new_story_";
-                    await context.Forward(new Dialogs.StoryDialog(/*ref api*/), this.ResumeAfterNewOrderDialog, activity, CancellationToken.None);
+                    await context.Forward(new Dialogs.StoryDialog(ref api), this.ResumeAfterNewOrderDialog, activity, CancellationToken.None);
                     break;
                 default:
                     string text = "Welcome to Story Time.";

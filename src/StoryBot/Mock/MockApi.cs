@@ -4,19 +4,31 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 
 namespace StoryBot.Mock
 {
+    [Serializable]
     public class MockApi
     {
         private Story story;
 
         public MockApi()
         {
-            var file = File.OpenText("../../../../../stories/sample.md");
+            try
+            {
+                Stream file = null;
+                using (var client = new WebClient())
+                {
+                    file = client.OpenRead("https://raw.githubusercontent.com/armanio123/StoryTime/master/stories/sample.md");
+                }
 
-            var parser = new MarkdownStoryParser();
-            story = parser.Parse(file.ReadToEnd());
+                var parser = new MarkdownStoryParser();
+                story = parser.Parse(new StreamReader(file).ReadToEnd());
+            }catch(Exception ex)
+            {
+                var x = ex;
+            }
         }
 
         public Section GetStartingSection()
