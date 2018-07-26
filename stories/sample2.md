@@ -10,7 +10,7 @@ Once you start, you get to choose a superability provided by a technological chi
 
 ## Actions
 * [Time traveling](#1)
-* [Teletransportation](#2)
+* [Teleportation](#2)
 * [Shapeshifting](#3)
 
 ## #1
