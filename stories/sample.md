@@ -37,3 +37,35 @@ More than what just happened, you are more surprised to see that the figure is a
 
 ## #DeeperIntoTheCave
 Without thinking you decided to run away from there, one of those poorly lit places is better than this darkness. Tumbling a couple times you manage to get there safe. The figure is no longer visible and you don't hear anything anymore. Looking for the lighter to improve your visibility you just notice you have dropped it during your run. After catching your breath and thinking through it, you regret to have lost the lighter, but that place was not safe for sure. So you continue to think it was the best choice.
+
+## Actions
+* [Keep walking.](#TheStream)
+
+## #TheStream
+You keep thinking about the figure lingering in the darkness, crawling... each time closer... the cave is now silent, you find a stream flowing through the cave, you can see your figure distorted as the water crashes against the rocks. You see another figure on the reflection, behind you...
+
+## Actions
+* [Look back.](#IntoMadness)
+  * skills: +["Madness"]
+* [Keep walking.](#ThePortal)
+
+## #IntoMadness
+You look back with anticipitation, for a second you swear that a deformed version of yourself was standing in front of you, you try to dismiss the ghastly vision.
+
+## Actions
+* [Keep walking.](#ThePortal)
+
+## #ThePortal
+A light shines across the corner, you walk closer and you see what looks like an exit, you are afraid of what might be waiting beyond the light.
+
+## Actions
+* [Walk across the light.](#TheExit)
+  * **skills: -["Madness"]**
+* [Stand Still.](#OneWithTheDarkness)
+  * **skills: ["Madness"]**
+
+## #TheExit
+You decide that you are better off facing whatever is beyond the light than staying in the cave, you walk across the portal and find yourself surrounded by a lush forest. The forest is more beautiful than anything you have ever seen before. You see a building in the distance, your journey has just started.
+
+## #OneWithTheDarkness
+You try to move, but you are overwhelmed with fear, you realize light is bad, only darkness nurtures. You start to imagine all the travelers that might try to cross this cave, you start to feel hungry, craving flesh.
