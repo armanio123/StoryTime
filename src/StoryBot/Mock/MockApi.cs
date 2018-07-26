@@ -11,44 +11,54 @@ namespace StoryBot.Mock
     [Serializable]
     public class MockApi
     {
-        private Story story;
+        private Story story1;
+        private Story story2;
 
         public MockApi()
         {
             try
             {
-                Stream file = null;
+                Stream file1 = null;
+                Stream file2 = null;
                 using (var client = new WebClient())
                 {
-                    file = client.OpenRead("https://raw.githubusercontent.com/armanio123/StoryTime/master/stories/sample.md");
+                    file1 = client.OpenRead("https://raw.githubusercontent.com/armanio123/StoryTime/master/stories/sample.md");
+                    file2 = client.OpenRead("https://raw.githubusercontent.com/armanio123/StoryTime/master/stories/sample2.md");
                 }
 
                 var parser = new MarkdownStoryParser();
-                story = parser.Parse(new StreamReader(file).ReadToEnd());
-            }catch(Exception ex)
+                story1 = parser.Parse(new StreamReader(file1).ReadToEnd());
+                story2 = parser.Parse(new StreamReader(file2).ReadToEnd());
+            }
+            catch (Exception ex)
             {
                 var x = ex;
             }
         }
 
-        public Section GetStartingSection()
+        public Section GetStartingSection(string storyId)
         {
-            return story.Sections.Values.First();
+            return GetStory(storyId).Sections.Values.First();
         }
 
-        public Dictionary<string, dynamic> GetStartingStats()
+        public Dictionary<string, dynamic> GetStartingStats(string storyId)
         {
-            return story.Stats;
+            return GetStory(storyId).Stats;
         }
 
-        public Section GetSectionById(string id)
+        public Section GetSectionById(string id, string storyId)
         {
-            return story.Sections.FirstOrDefault(x => x.Key == id).Value;
+            return GetStory(storyId).Sections.FirstOrDefault(x => x.Key == id).Value;
         }
 
-        public string GetStoryTitleAndAuthor()
+        public string GetStoryTitleAndAuthor(string storyId)
         {
-            return string.Format("{0} {1}. ", story.Title, story.Author);
+            return string.Format("{0} {1}. ", GetStory(storyId).Title, GetStory(storyId).Author);
+        }
+
+        private Story GetStory(string id)
+        {
+            return id == "0" ? story1 :story2;
         }
     }
 }

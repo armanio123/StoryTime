@@ -6,7 +6,6 @@ using StoryBot.Models.StoryTime.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting;
 using System.Threading.Tasks;
 
 namespace StoryBot.Dialogs
@@ -16,7 +15,7 @@ namespace StoryBot.Dialogs
     {
         private Section storySection = null;
         private Dictionary<string, dynamic> stats = null;
-        MockApi api;
+        private MockApi api;
 
         public StoryDialog(ref MockApi api)
         {
@@ -39,17 +38,21 @@ namespace StoryBot.Dialogs
             string activityValue = (activity.Text?.ToLower().ToString() ?? string.Empty);
 
             bool readStoryTitle = false;
+            string storyId = userData.GetProperty<string>("StoryId");
+
             switch (activityValue)
             {
                 case "_new_story_":
                 case "play again":
                     readStoryTitle = true;
-                    storySection = api.GetStartingSection();
-                    stats = api.GetStartingStats();
+                    storyId = storyId == null || storyId == "1" ? "0" : "1";
+                    storySection = api.GetStartingSection(storyId);
+                    stats = api.GetStartingStats(storyId);
                     break;
                 case "_continue_":
                     string storedNode = userData.GetProperty<string>("StoryNode");
-                    storySection = storedNode != null && storedNode != "" ? api.GetSectionById(storedNode) ?? api.GetStartingSection() : api.GetStartingSection();
+
+                    storySection = !string.IsNullOrWhiteSpace(storedNode) ? api.GetSectionById(storedNode, storyId) ?? api.GetStartingSection(storyId) : api.GetStartingSection(storyId);
                     stats = userData.GetProperty<Dictionary<string, dynamic>>("Stats");
                     break;
                 case "_return_":
@@ -63,7 +66,7 @@ namespace StoryBot.Dialogs
                         // If option is valid process section effects and move to next section.
                         if (choiceSectionKey != null)
                         {
-                            var nextSection = api.GetSectionById(choiceSectionKey.SectionKey);
+                            var nextSection = api.GetSectionById(choiceSectionKey.SectionKey, storyId);
 
                             UpdateState(stats, choiceSectionKey.Effects);
 
@@ -76,9 +79,11 @@ namespace StoryBot.Dialogs
                     break;
             }
 
-            userData.SetProperty<Dictionary<string,dynamic>>("Stats", stats);
+            userData.SetProperty<Dictionary<string, dynamic>>("Stats", stats);
 
             userData.SetProperty<string>("StoryNode", storySection.Key);
+            userData.SetProperty<string>("StoryId", storyId);
+
             stateClient.BotState.SetUserData(activity.ChannelId, activity.From.Id, userData);
 
             Activity reply = null;
@@ -86,9 +91,9 @@ namespace StoryBot.Dialogs
             if (storySection != null)
             {
                 string storyTitle = "";
-                if(readStoryTitle)
+                if (readStoryTitle)
                 {
-                    storyTitle = api.GetStoryTitleAndAuthor();
+                    storyTitle = api.GetStoryTitleAndAuthor(storyId);
                 }
 
                 reply = activity.CreateReply((readStoryTitle ? storyTitle + "\n" : "") + storySection.Text);
@@ -165,11 +170,11 @@ namespace StoryBot.Dialogs
             return result;
         }
 
-        Choice MatchActivityValueToChoice(Section storySection, string activityValue)
+        private Choice MatchActivityValueToChoice(Section storySection, string activityValue)
         {
-            foreach(var choice in storySection.Choices)
+            foreach (var choice in storySection.Choices)
             {
-                if(choice.SectionKey.ToLower() == activityValue)
+                if (choice.SectionKey.ToLower() == activityValue)
                 {
                     return choice;
                 }
@@ -185,21 +190,20 @@ namespace StoryBot.Dialogs
             return null;
         }
 
-        bool IsChoicePossible(Dictionary<string, dynamic> state, IEnumerable<StatEffect> conditions)
+        private bool IsChoicePossible(Dictionary<string, dynamic> state, IEnumerable<StatEffect> conditions)
         {
-            if(conditions == null)
+            if (conditions == null)
             {
                 return true;
             }
 
-            foreach(var condition in conditions)
+            foreach (var condition in conditions)
             {
                 if (stats.ContainsKey(condition.Key))
                 {
-                    dynamic statsValue = null;
-                    stats.TryGetValue(condition.Key, out statsValue);
+                    stats.TryGetValue(condition.Key, out dynamic statsValue);
 
-                    
+
                     if ((statsValue is int || statsValue is long) && condition.Value is int conditionInt)
                     {
                         int statsValueInt = (int)statsValue;
@@ -212,7 +216,7 @@ namespace StoryBot.Dialogs
                     {
                         foreach (var conditionArrItem in conditionArray)
                         {
-                            if(statsValueArray.FirstOrDefault(x => x == conditionArrItem) == null)
+                            if (statsValueArray.FirstOrDefault(x => x == conditionArrItem) == null)
                             {
                                 return false;
                             }
@@ -232,14 +236,13 @@ namespace StoryBot.Dialogs
             return true;
         }
 
-        void UpdateState(Dictionary<string, dynamic> state, IEnumerable<StatEffect> effects)
+        private void UpdateState(Dictionary<string, dynamic> state, IEnumerable<StatEffect> effects)
         {
-            foreach(var effect in effects)
+            foreach (var effect in effects)
             {
                 if (stats.ContainsKey(effect.Key))
                 {
-                    dynamic statsValue = null;
-                    stats.TryGetValue(effect.Key, out statsValue);
+                    stats.TryGetValue(effect.Key, out dynamic statsValue);
 
                     if ((statsValue is int || statsValue is long) && effect.Value is int effectInt)
                     {
