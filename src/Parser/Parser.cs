@@ -320,7 +320,7 @@ namespace Parser
             }
             if (block is ParagraphBlock paragraphBlock)
             {
-                return string.Join(string.Empty, paragraphBlock.Inline.Descendants<LiteralInline>().Select(x => x.Content.ToString()));
+                return string.Join(" ", paragraphBlock.Inline.Descendants<LiteralInline>().Select(x => x.Content.ToString()));
             }
 
             return null;
