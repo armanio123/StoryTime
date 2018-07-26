@@ -74,6 +74,7 @@ namespace StoryBot.Dialogs
 
                     reply.Attachments.Add(heroCard.ToAttachment());
 
+                    reply.InputHint = InputHints.ExpectingInput;
                     reply.Type = ActivityTypes.Message;
                     reply.TextFormat = TextFormatTypes.Plain;
 

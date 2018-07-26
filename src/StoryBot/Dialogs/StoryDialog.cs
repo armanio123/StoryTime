@@ -40,6 +40,8 @@ namespace StoryBot.Dialogs
             bool readStoryTitle = false;
             string storyId = userData.GetProperty<string>("StoryId");
 
+            var prevStorySection = storySection;
+
             switch (activityValue)
             {
                 case "_new_story_":
@@ -78,6 +80,9 @@ namespace StoryBot.Dialogs
                     }
                     break;
             }
+
+            // If story section has not changed only read the options, not the whole story section again.
+            bool onlyReadOptions = prevStorySection != null && prevStorySection == storySection;
 
             userData.SetProperty<Dictionary<string, dynamic>>("Stats", stats);
 
@@ -119,7 +124,7 @@ namespace StoryBot.Dialogs
                     }
                 }
 
-                reply.Speak = storyTitle + BuildSpeakText(storySection.Text, availableChoices);
+                reply.Speak = storyTitle + BuildSpeakText(storySection.Text, availableChoices, onlyReadOptions);
 
                 // If we have reached the end of the story or if there are not enough choices remaining prompt player
                 // to start the story again.
@@ -145,6 +150,7 @@ namespace StoryBot.Dialogs
                 reply.Attachments.Add(heroCard.ToAttachment());
             }
 
+            reply.InputHint = InputHints.ExpectingInput;
             reply.Type = ActivityTypes.Message;
             reply.TextFormat = TextFormatTypes.Plain;
 
@@ -153,9 +159,9 @@ namespace StoryBot.Dialogs
             context.Wait(MessageReceivedAsync);
         }
 
-        private string BuildSpeakText(string text, IEnumerable<Choice> choices)
+        private string BuildSpeakText(string text, IEnumerable<Choice> choices, bool onlyReadOptions)
         {
-            string result = text;
+            string result = onlyReadOptions ? "" : text;
             if (choices != null && choices.Count() > 0)
             {
                 result += " You have the following options, you can...";
@@ -174,7 +180,7 @@ namespace StoryBot.Dialogs
         {
             foreach (var choice in storySection.Choices)
             {
-                if (choice.SectionKey.ToLower() == activityValue)
+                if (choice.SectionKey.ToLower() == activityValue || choice.Text.ToLower() == activityValue)
                 {
                     return choice;
                 }
