@@ -45,5 +45,10 @@ namespace StoryBot.Mock
         {
             return story.Sections.FirstOrDefault(x => x.Key == id).Value;
         }
+
+        public string GetStoryTitleAndAuthor()
+        {
+            return string.Format("{0} {1}. ", story.Title, story.Author);
+        }
     }
 }
