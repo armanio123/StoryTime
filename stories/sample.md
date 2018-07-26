@@ -48,6 +48,7 @@ You keep thinking about the figure lingering in the darkness, crawling... each t
 * [Look back.](#IntoMadness)
   * skills: +["Madness"]
 * [Keep walking.](#ThePortal)
+  * skills: +["Guts"]
 
 ## #IntoMadness
 You look back with anticipation, for a second you swear that a deformed version of yourself was standing in front of you, you try to dismiss the ghastly vision.
@@ -60,7 +61,7 @@ A light shines across the corner, you walk closer and you see what looks like an
 
 ## Actions
 * [Walk across the light.](#TheExit)
-  * **skills: -["Madness"]**
+  * **skills: ["Guts"]**
 * [Stand Still.](#OneWithTheDarkness)
   * **skills: ["Madness"]**
 

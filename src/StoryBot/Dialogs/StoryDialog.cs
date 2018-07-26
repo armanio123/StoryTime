@@ -180,7 +180,7 @@ namespace StoryBot.Dialogs
         {
             foreach (var choice in storySection.Choices)
             {
-                if (choice.SectionKey.ToLower() == activityValue || choice.Text.ToLower() == activityValue)
+                if (choice.SectionKey.ToLower() == activityValue || choice.Text.ToLower() == activityValue || choice.Text.ToLower() == activityValue + ".")
                 {
                     return choice;
                 }
