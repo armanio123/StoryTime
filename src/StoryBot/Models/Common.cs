@@ -16,7 +16,8 @@ namespace StoryBot.Models
                 { "option a", 0},{ "option b", 1},{ "option c", 2},{ "option d", 3},{ "option e", 4},
                 { "first", 0},{ "second", 1},{ "third", 2},{ "fourth", 3},{ "fifth", 4},
                 { "1st", 0},{ "2nd", 1},{ "3rd", 2},{ "4th", 3},{ "5th", 4},
-                { "first option", 0},{ "second option", 1},{ "third option", 2},{ "fourth option", 3},{ "fifth option", 4}
+                { "first option", 0},{ "second option", 1},{ "third option", 2},{ "fourth option", 3},{ "fifth option", 4},
+                { "1st option", 0},{ "2nd option", 1},{ "3rd option", 2},{ "4th option", 3},{ "5th option", 4}
             };
 
             public static int GetChoiceKeyMatch(string key)
