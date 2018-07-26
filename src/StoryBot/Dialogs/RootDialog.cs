@@ -26,27 +26,27 @@ namespace StoryBot.Dialogs
 
             StateClient stateClient = activity.GetStateClient();
             //stateClient.BotState.DeleteStateForUser(activity.ChannelId, activity.From.Id);
-            string storyNode = activity.Text.ToLower();
+            string storyNode = activity.Text?.ToLower();
 
             BotData userData = stateClient.BotState.GetUserData(activity.ChannelId, activity.From.Id);
             string storedStoryNode = userData.GetProperty<string>("StoryNode");
 
             Activity reply;
 
-            switch(storyNode)
+            switch (storyNode)
             {
                 case "continue":
                     activity.Text = "_continue_";
                     await context.Forward(new Dialogs.StoryDialog(ref api), this.ResumeAfterNewOrderDialog, activity, CancellationToken.None);
                     break;
-                case "start new story":
+                case "start story":
                     activity.Text = "_new_story_";
                     await context.Forward(new Dialogs.StoryDialog(ref api), this.ResumeAfterNewOrderDialog, activity, CancellationToken.None);
                     break;
                 default:
-                    string text = "Welcome to Story Time.";
+                    string text = "Welcome to an Adventure!";
                     reply = activity.CreateReply(text);
-                    reply.Speak = storedStoryNode != null ? "Welcome to Story Time. You can say, continue!, or say, start a new story!" : "Welcome to Story Time. You can say, start a new story!";
+                    reply.Speak = storedStoryNode != null ? "Welcome to Story Time. You can say, continue!, or say, start story!" : "Welcome to Story Time. You can say, start story!";
 
                     List<CardAction> cardButtons = new List<CardAction>();
 
@@ -63,7 +63,7 @@ namespace StoryBot.Dialogs
                     cardButtons.Add(new CardAction()
                     {
                         Title = "Start new Story",
-                        Value = "start new story",
+                        Value = "start story",
                         Type = "imBack"
                     });
 

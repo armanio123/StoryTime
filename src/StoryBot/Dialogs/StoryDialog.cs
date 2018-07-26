@@ -36,11 +36,12 @@ namespace StoryBot.Dialogs
 
             BotData userData = stateClient.BotState.GetUserData(activity.ChannelId, activity.From.Id);
 
-            string activityValue = (activity.Text.ToString() ?? string.Empty);
+            string activityValue = (activity.Text?.ToLower().ToString() ?? string.Empty);
 
             switch (activityValue)
             {
                 case "_new_story_":
+                case "play again":
                     storySection = api.GetStartingSection();
                     stats = api.GetStartingStats();
                     break;
@@ -84,18 +85,15 @@ namespace StoryBot.Dialogs
             {
                 reply = activity.CreateReply(storySection.Text);
 
-                reply.Speak = BuildSpeakText(storySection.Text, storySection.Choices);
-
                 List<CardAction> cardButtons = new List<CardAction>();
-
-                int availableChoices = 0;
+                List<Choice> availableChoices = new List<Choice>();
                 if (storySection.Choices != null)
                 {
                     foreach (var choice in storySection.Choices)
                     {
                         if (IsChoicePossible(stats, choice.Conditions))
                         {
-                            availableChoices++;
+                            availableChoices.Add(choice);
                             cardButtons.Add(new CardAction()
                             {
                                 Title = choice.Text,
@@ -108,11 +106,13 @@ namespace StoryBot.Dialogs
                     }
                 }
 
+                reply.Speak = BuildSpeakText(storySection.Text, availableChoices);
+
                 // If we have reached the end of the story or if there are not enough choices remaining prompt player
                 // to start the story again.
-                if(storySection.Choices == null || availableChoices == 0)
+                if (storySection.Choices == null || availableChoices.Count == 0)
                 {
-                    reply.Speak = " You have reached the end of the story, you can say, Play again!, to play the story again.";
+                    reply.Speak += " You have reached the end of the story, you can say, Play again!, to play the story again.";
 
                     cardButtons.Add(new CardAction()
                     {
@@ -143,12 +143,13 @@ namespace StoryBot.Dialogs
         private string BuildSpeakText(string text, IEnumerable<Choice> choices)
         {
             string result = text;
-            if (choices != null)
+            if (choices != null && choices.Count() > 0)
             {
+                result += " You have the following options, you can...";
                 int count = 1;
                 foreach (var option in choices)
                 {
-                    result += string.Format(" {0}) {1}", count, option);
+                    result += string.Format(" {0}) {1}", count, option.Text);
                     count++;
                 }
             }
@@ -160,7 +161,7 @@ namespace StoryBot.Dialogs
         {
             foreach(var choice in storySection.Choices)
             {
-                if(choice.SectionKey == activityValue)
+                if(choice.SectionKey.ToLower() == activityValue)
                 {
                     return choice;
                 }
@@ -168,7 +169,7 @@ namespace StoryBot.Dialogs
 
             int choiceIndex = ChoiceKeyEquivalents.GetChoiceKeyMatch(activityValue);
 
-            if (choiceIndex > -1 && choiceIndex < storySection.Choices.Count() -1)
+            if (choiceIndex > -1 && choiceIndex < storySection.Choices.Count())
             {
                 return storySection.Choices.ElementAt(choiceIndex);
             }
