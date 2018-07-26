@@ -30,37 +30,35 @@ namespace Parser
         {
             Story story = new Story
             {
+                Author = string.Empty,
                 Sections = new Dictionary<string, Section>(),
                 Stats = new Dictionary<string, dynamic>(),
-                Title = null
+                Title = string.Empty
             };
 
-            for (int i = 0; i < markdownDocument.Count; i++)
+            foreach (var headingBlock in markdownDocument.Descendants<HeadingBlock>())
             {
-                if (!(markdownDocument[i] is HeadingBlock headingBlock))
-                {
-                    throw new Exception("The Story doesn't contain a Title, Section or Stats.");
-                }
+                var nextBlockIndex = markdownDocument.IndexOf(headingBlock) + 1;
 
                 string headingContent = GetBlockContent(headingBlock);
+
+                if (string.Equals(headingContent, "actions", StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
 
                 switch (headingBlock.Level)
                 {
                     // Heading 1 is reserverd for Title
                     case 1:
                         // TODO: Validate if more than on title is found.
-                        story.Title = story.Title ?? headingContent;
+                        story.Title = string.IsNullOrWhiteSpace(story.Title) ? headingContent : story.Title;
 
-                        string author = GetBlockContent(markdownDocument, i + 1);
+                        string author = GetBlockContent<ParagraphBlock>(markdownDocument, nextBlockIndex);
 
-                        if ( author == null )
-                        {
-                            story.Author = "by Anonymous";
-                        }
-                        else
+                        if (!string.IsNullOrWhiteSpace(author))
                         {
                             story.Author = author;
-                            i++;
                         }
 
                         break;
@@ -68,23 +66,17 @@ namespace Parser
                     default:
                         bool isStats = string.Equals("stats", headingContent, StringComparison.OrdinalIgnoreCase);
 
-                        i++;
-
                         if (isStats)
                         {
                             // TODO: Validate if the stats are already found.
-                            AddStats(story.Stats, ParseStats(markdownDocument, i));
+                            AddStats(story.Stats, ParseStats(markdownDocument, nextBlockIndex));
                         }
                         else
                         {
-                            var paragraphs = ParseContent(markdownDocument, i);
+                            var paragraphs = ParseContent(markdownDocument, nextBlockIndex);
                             var content = string.Join(string.Empty, paragraphs);
 
-                            i += paragraphs.Count() - 1;
-
-                            var nextBlock = i + 2; // Skip title and place index in the Choices.
-                            var choices = ParseChoices(markdownDocument, nextBlock);
-                            i = choices.Any() ? nextBlock : i; // Move index if there are any choices; otherwise keep it the same.
+                            var choices = ParseChoices(markdownDocument, nextBlockIndex + paragraphs.Count() + 1);
 
                             Section section = new Section
                             {
@@ -117,10 +109,10 @@ namespace Parser
             return true;
         }
 
-        private IEnumerable<string> ParseContent(MarkdownDocument markdownDocument, int i)
+        private IEnumerable<string> ParseContent(MarkdownDocument markdownDocument, int index)
         {
             // Concat all paragraphs, skip the blocks already parsed.
-            var paragraphs = markdownDocument.Skip(i).TakeWhile(x => x is ParagraphBlock).Select(GetBlockContent);
+            var paragraphs = markdownDocument.Skip(index).TakeWhile(x => x is ParagraphBlock).Select(GetBlockContent);
 
             if (!paragraphs.Any())
             {
@@ -130,9 +122,9 @@ namespace Parser
             return paragraphs;
         }
 
-        private Dictionary<string, dynamic> ParseStats(MarkdownDocument markdownDocument, int i)
+        private Dictionary<string, dynamic> ParseStats(MarkdownDocument markdownDocument, int index)
         {
-            if (markdownDocument.Count() < i || !(markdownDocument[i] is ListBlock listBlock))
+            if (markdownDocument.Count() < index || !(markdownDocument[index] is ListBlock listBlock))
             {
                 throw new Exception("No Stats found. After a Stats heading a list of the Stats should be present.");
             }
@@ -156,16 +148,16 @@ namespace Parser
             return stats;
         }
 
-        private List<Choice> ParseChoices(MarkdownDocument markdownDocument, int i)
+        private List<Choice> ParseChoices(MarkdownDocument markdownDocument, int index)
         {
             var choices = new List<Choice>();
 
-            if (markdownDocument.Count() < i)
+            if (markdownDocument.Count() < index)
             {
                 return choices;
             }
 
-            if (!(markdownDocument[i] is ListBlock listBlock))
+            if (!(markdownDocument[index] is ListBlock listBlock))
             {
                 return choices;
             }
@@ -310,11 +302,11 @@ namespace Parser
             }
         }
 
-        private string GetBlockContent(MarkdownDocument markdownDocument, int i)
+        private string GetBlockContent<T>(MarkdownDocument markdownDocument, int index)
         {
-            if(markdownDocument.Count() > i)
+            if (markdownDocument.Count() > index && markdownDocument[index] is T)
             {
-                return GetBlockContent(markdownDocument[i]);
+                return GetBlockContent(markdownDocument[index]);
             }
 
             return null;
