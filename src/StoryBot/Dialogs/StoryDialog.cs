@@ -63,7 +63,7 @@ namespace StoryBot.Dialogs
                 default:
                     if (activityValue.Length > 0)
                     {
-                        var choiceSectionKey = MatchActivityValueToChoice(storySection, activityValue);
+                        var choiceSectionKey = MatchActivityValueToChoice(stats, storySection, activityValue);
 
                         // If option is valid process section effects and move to next section.
                         if (choiceSectionKey != null)
@@ -176,13 +176,16 @@ namespace StoryBot.Dialogs
             return result;
         }
 
-        private Choice MatchActivityValueToChoice(Section storySection, string activityValue)
+        private Choice MatchActivityValueToChoice(Dictionary<string, dynamic> state, Section storySection, string activityValue)
         {
             foreach (var choice in storySection.Choices)
             {
-                if (choice.SectionKey.ToLower() == activityValue || choice.Text.ToLower() == activityValue || choice.Text.ToLower() == activityValue + ".")
+                if (IsChoicePossible(state, choice.Conditions))
                 {
-                    return choice;
+                    if (choice.SectionKey.ToLower() == activityValue || choice.Text.ToLower() == activityValue || choice.Text.ToLower() == activityValue + ".")
+                    {
+                        return choice;
+                    }
                 }
             }
 
