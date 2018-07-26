@@ -46,7 +46,7 @@ namespace StoryBot.Dialogs
                 default:
                     string text = "Welcome to an Adventure!";
                     reply = activity.CreateReply(text);
-                    reply.Speak = storedStoryNode != null ? "Welcome to Story Time. You can say, continue!, or say, start story!" : "Welcome to Story Time. You can say, start story!";
+                    reply.Speak = storedStoryNode != null ? "Welcome to an Adventure! You can say, continue!, or say, start story!" : "Welcome to an Adventure! You can say, start story!";
 
                     List<CardAction> cardButtons = new List<CardAction>();
 

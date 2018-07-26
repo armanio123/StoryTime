@@ -38,10 +38,12 @@ namespace StoryBot.Dialogs
 
             string activityValue = (activity.Text?.ToLower().ToString() ?? string.Empty);
 
+            bool readStoryTitle = false;
             switch (activityValue)
             {
                 case "_new_story_":
                 case "play again":
+                    readStoryTitle = true;
                     storySection = api.GetStartingSection();
                     stats = api.GetStartingStats();
                     break;
@@ -83,7 +85,13 @@ namespace StoryBot.Dialogs
 
             if (storySection != null)
             {
-                reply = activity.CreateReply(storySection.Text);
+                string storyTitle = "";
+                if(readStoryTitle)
+                {
+                    storyTitle = api.GetStoryTitleAndAuthor();
+                }
+
+                reply = activity.CreateReply((readStoryTitle ? storyTitle + "\n" : "") + storySection.Text);
 
                 List<CardAction> cardButtons = new List<CardAction>();
                 List<Choice> availableChoices = new List<Choice>();
@@ -106,7 +114,7 @@ namespace StoryBot.Dialogs
                     }
                 }
 
-                reply.Speak = BuildSpeakText(storySection.Text, availableChoices);
+                reply.Speak = storyTitle + BuildSpeakText(storySection.Text, availableChoices);
 
                 // If we have reached the end of the story or if there are not enough choices remaining prompt player
                 // to start the story again.
