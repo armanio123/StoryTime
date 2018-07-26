@@ -8,12 +8,15 @@ namespace StoryTime.TestClient
     {
         private static void Main(string[] args)
         {
-            var file = File.OpenText("../../../../../stories/sample.md");
+            var file1 = File.OpenText("../../../../../stories/sample.md");
+            var file2 = File.OpenText("../../../../../stories/sample2.md");
 
             var parser = new MarkdownStoryParser();
-            var story = parser.Parse(file.ReadToEnd());
+            var story1 = parser.Parse(file1.ReadToEnd());
+            var story2 = parser.Parse(file2.ReadToEnd());
 
-            var json = JsonConvert.SerializeObject(story);
+            var json1 = JsonConvert.SerializeObject(story1);
+            var json2 = JsonConvert.SerializeObject(story2);
         }
     }
 }
