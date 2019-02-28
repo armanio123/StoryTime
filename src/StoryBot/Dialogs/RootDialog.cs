@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using StoryBot.Mock;
+using StringTools;
 
 namespace StoryBot.Dialogs
 {
@@ -12,6 +13,11 @@ namespace StoryBot.Dialogs
     public class RootDialog : IDialog<object>
     {
         public MockApi api;
+        private readonly List<string> options = new List<string>
+        {
+            "continue",
+            "start story"
+        };
 
         public async Task StartAsync(IDialogContext context)
         {
@@ -26,7 +32,8 @@ namespace StoryBot.Dialogs
 
             StateClient stateClient = activity.GetStateClient();
             //stateClient.BotState.DeleteStateForUser(activity.ChannelId, activity.From.Id);
-            string storyNode = activity.Text?.ToLower();
+            var storyNodeIndex = StringSimilarity.GetIndex(activity.Text, this.options);
+            var storyNode = storyNodeIndex != -1 ? options[storyNodeIndex] : string.Empty;
 
             BotData userData = stateClient.BotState.GetUserData(activity.ChannelId, activity.From.Id);
             string storedStoryNode = userData.GetProperty<string>("StoryNode");
@@ -62,7 +69,7 @@ namespace StoryBot.Dialogs
 
                     cardButtons.Add(new CardAction()
                     {
-                        Title = "Start new Story",
+                        Title = "Start Story",
                         Value = "start story",
                         Type = "imBack"
                     });

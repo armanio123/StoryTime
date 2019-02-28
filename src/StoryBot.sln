@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parser", "Parser\Parser.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoryTime.TestClient", "StoryTime.TestClient\StoryTime.TestClient.csproj", "{2AC80A6E-046D-4197-98DA-7C0B8CB66192}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringTools", "StringTools\StringTools.csproj", "{BEF460E6-27B2-4E9F-B07E-897D6A0330E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{2AC80A6E-046D-4197-98DA-7C0B8CB66192}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AC80A6E-046D-4197-98DA-7C0B8CB66192}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AC80A6E-046D-4197-98DA-7C0B8CB66192}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEF460E6-27B2-4E9F-B07E-897D6A0330E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEF460E6-27B2-4E9F-B07E-897D6A0330E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEF460E6-27B2-4E9F-B07E-897D6A0330E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEF460E6-27B2-4E9F-B07E-897D6A0330E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

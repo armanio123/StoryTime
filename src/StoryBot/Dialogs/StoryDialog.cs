@@ -3,6 +3,7 @@ using Microsoft.Bot.Connector;
 using Parser.Entities;
 using StoryBot.Mock;
 using StoryBot.Models.StoryTime.Shared;
+using StringTools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,7 +59,6 @@ namespace StoryBot.Dialogs
                     stats = userData.GetProperty<Dictionary<string, dynamic>>("Stats");
                     break;
                 case "_return_":
-
                     break;
                 default:
                     if (activityValue.Length > 0)
@@ -182,15 +182,21 @@ namespace StoryBot.Dialogs
 
             foreach (var choice in storySection.Choices)
             {
-                if(IsChoicePossible(state, choice.Conditions))
+                if (IsChoicePossible(state, choice.Conditions))
                 {
                     availableChoices.Add(choice);
                 }
             }
 
-            foreach(var choice in availableChoices)
+            var index = StringSimilarity.GetIndex(activityValue, availableChoices.Select(x => x.Text));
+            if (index != -1)
             {
-                if (choice.SectionKey.ToLower() == activityValue || choice.Text.ToLower() == activityValue || choice.Text.ToLower() == activityValue + ".")
+                return availableChoices[index];
+            }
+
+            foreach (var choice in availableChoices)
+            {
+                if (string.Equals(choice.SectionKey, activityValue, StringComparison.OrdinalIgnoreCase))
                 {
                     return choice;
                 }
@@ -218,7 +224,6 @@ namespace StoryBot.Dialogs
                 if (stats.ContainsKey(condition.Key))
                 {
                     stats.TryGetValue(condition.Key, out dynamic statsValue);
-
 
                     if ((statsValue is int || statsValue is long) && condition.Value is int conditionInt)
                     {

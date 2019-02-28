@@ -175,6 +175,10 @@
       <Project>{AF0DBB99-8A05-4BF7-A69D-55BB0F5FCCE8}</Project>
       <Name>Parser</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StringTools\StringTools.csproj">
+      <Project>{bef460e6-27b2-4e9f-b07e-897d6a0330e3}</Project>
+      <Name>StringTools</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp">
