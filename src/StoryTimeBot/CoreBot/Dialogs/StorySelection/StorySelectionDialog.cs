@@ -3,6 +3,7 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
 using Parser.Entities;
+using StringTools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -174,12 +175,18 @@ namespace CoreBot.Dialogs.StorySelection
                 }
             }
 
-            //int choiceIndex = ChoiceKeyEquivalents.GetChoiceKeyMatch(activityValue);
+            List<string> choicesText = new List<string>();
+            foreach(Choice choice in availableChoices)
+            {
+                choicesText.Add(choice.Text);
+            }
 
-            //if (choiceIndex > -1 && choiceIndex < availableChoices.Count())
-            //{
-            //    return availableChoices.ElementAt(choiceIndex);
-            //}
+            int choiceIndex = StringSimilarity.GetIndex(activityLowerCase, choicesText);
+
+            if (choiceIndex > -1 && choiceIndex < availableChoices.Count())
+            {
+                return availableChoices.ElementAt(choiceIndex);
+            }
 
             return null;
         }
@@ -188,6 +195,7 @@ namespace CoreBot.Dialogs.StorySelection
         {
             var activity = context.Activity.CreateReply(text);
             activity.Speak = speak;
+            activity.InputHint = InputHints.ExpectingInput;
             activity.SuggestedActions = new SuggestedActions();
             activity.SuggestedActions.Actions = new List<CardAction>();
 

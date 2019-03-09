@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Parser\Parser.csproj" />
+    <ProjectReference Include="..\..\StringTools\StringTools.csproj" />
   </ItemGroup>
 
   <ItemGroup>
