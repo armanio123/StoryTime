@@ -30,7 +30,7 @@ Let's add some content to your story. After the title's paragraph add the follow
 An ogre has seen you and is running towards you. There is a sword far away from you. You can either
 
 ## #Ending1
-You keep running away from the ogre but he's too fast for you. Tired and without air you're not match for him. You died.
+You keep running away from the ogre but he's too fast for you. Tired and without air you're no match for him. You died.
 
 ## #Ending2
 You defend yourself with all your might and manage to defeat the ogre. Congratulations. 
@@ -66,7 +66,7 @@ An ogre has detect you and is running towards you. There's is a sword a little f
 * [or punch him](#Ending2)
 
 ## #Ending1
-You keep running away from the ogre but he's too fast for you. Tired and without air you're not match for him. You died.
+You keep running away from the ogre but he's too fast for you. Tired and without air you're no match for him. You died.
 
 ## #Ending2
 You defend yourself with all your might and manage to defeat the ogre. Congratulations. 
@@ -190,7 +190,7 @@ The ogre is upon you and without a doubt he's about to attack. Will you
     * inventory: -["shield"]
 
 ## #Ending1
-You keep running away from the ogre but he's too fast for you. Tired and without air you're not match for him. You died.
+You keep running away from the ogre but he's too fast for you. Tired and without air you're no match for him. You died.
 
 ## #Ending2
 You defend yourself with all your might and manage to defeat the ogre. Congratulations.
