@@ -14,7 +14,7 @@ With focus on the writer, we decided that the best and easy approach for writing
 
 The first thing is creating a file with extension `.md` and adding a title. We'll use `TheOgre.md`:
 
-```md
+```markdown
 # The Ogre
 by anonymous author.
 ```
@@ -25,7 +25,7 @@ The first line `# The Ogre` will be recognized by Cortana and read it as is.
 
 Let's add some content to your story. After the title's paragraph add the following text:
 
-```md
+```markdown
 ## #Chapter1
 An ogre has seen you and is running towards you. There is a sword far away from you. You can either
 
@@ -44,7 +44,7 @@ Right now the story is not much than just paragraphs with no context. You need t
 
 To allow multiple paths on your story you need to add the following text after a paragraph:
 
-```md
+```markdown
 ## Choices
 * [run away](#Ending1)
 * [or punch him](#Ending2)
@@ -57,7 +57,7 @@ Only the text contained between square brackets `[]` is narrated to the user.
 Your story should look like this:
 
 `TheOgre.md`
-```md
+```markdown
 ## #Chapter1
 An ogre has detect you and is running towards you. There's is a sword a little far away from you. You can either
 
@@ -94,7 +94,7 @@ A `Stats` section will initialize some player's attributes when the story starts
 
 After the title's paragraph (`The Ogre`) add the following section:
 
-```md
+```markdown
 ## Stats
 * hp: 10
 * inventory: ["shield"]
@@ -113,7 +113,7 @@ If you'll like for a choice to either increase or decrease a stat you need to sp
 
 Replace your previous choices with the following and add one more paragraph:
 
-```md
+```markdown
 ## Choices
 * [try to talk to the ogre](#ConfrontOgre)
     * hp: -5
@@ -135,7 +135,7 @@ It's important to indent the "stat" so StoryTime recognizes this is a consecuenc
 
 `Stats` can be used to conditionally narrate the choices on your story. Let's add this to your story as well. After the `ConfrontOgre` paragraph add:
 
-```md
+```markdown
 ## Choices
 * [run away](#Ending1)
     * hp: -5
@@ -159,7 +159,7 @@ Notice that some of the options are not only conditional but they also affect th
 Your story should look similar to this:
 
 `The Ogre.md`
-```md
+```markdown
 # The Ogre
 by anonymous author.
 
