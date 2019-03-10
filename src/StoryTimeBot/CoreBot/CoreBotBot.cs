@@ -31,7 +31,7 @@ namespace CoreBot
         /// Key in the bot config (.bot file) for the LUIS instance.
         /// In the .bot file, multiple instances of LUIS can be configured.
         /// </summary>
-        public static readonly string LuisConfiguration = "LuisBot";
+        public static readonly string LuisConfiguration = "BasicBotLuisApplication";
 
         private readonly IStatePropertyAccessor<GreetingState> _greetingStateAccessor;
         private readonly IStatePropertyAccessor<StorySelectionState> _storySelectionStateAccessor;
