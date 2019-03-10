@@ -6,11 +6,11 @@ With the rise of digital assistants, home devices, etc, it is now possible to li
 
 The user decide the plot by using voice or typing the option. We have also created a simple text framework for anybody to create their own stories and share them with the world.
 
-# Create your own story
+# Create your own story.
 
 With focus on the writer, we decided that the best and easy approach for writing a story is to use the markup language Markdown. You don't need to know all about it as we only used some of its features. Nonetheless, if you like to know more about it you can read it [here](https://guides.github.com/features/mastering-markdown/).
 
-## Start with a title
+## Start with a title.
 
 The first thing is creating a file with extension `.md` and adding a title. We'll use `TheOgre.md`:
 
@@ -19,7 +19,7 @@ The first thing is creating a file with extension `.md` and adding a title. We'l
 by anonymous author.
 ```
 
-The first line `# The Ogre` will be recognized by Cortana and read it as is.
+The first line `# The Ogre` will be recognized by StoryTime and narrated as is.
 
 ## Add a chapter.
 
@@ -38,7 +38,7 @@ You defend yourself with all your might and manage to defeat the ogre. Congratul
 
 Notice the double `##` on each paragraph. This is important as it will define the start of a paragraph. StoryTime is not going to narrate or display this line. This line needs to be composed of only letters or numbers and start with another `#`. This is used as an identifier for the `Choices` explained below.
 
-## Performing choices
+## Performing choices.
 
 Right now the story is not much than just paragraphs with no context. You need to add some choices for the user to decide what to do.
 
@@ -52,7 +52,7 @@ To allow multiple paths on your story you need to add the following text after a
 
 Only the text contained between square brackets `[]` is narrated to the user.
 
-## Story so far
+## Story so far.
 
 Your story should look like this:
 
@@ -103,11 +103,11 @@ After the title's paragraph (`The Ogre`) add the following section:
 `hp` will be a numeric stat that can be added or subtracted and will keep track of the users health.
 `inventory` is a stat that either defines if the player has or doesn't have something. In this example the user is carrying a `shield`.
 
-## Actions have consequences
+## Actions have consequences.
 
 Every choice the user performs can have an effect on the stats. It can either add, remove, decrease or increase a stat.
 
-### Modifying a stat
+### Modifying a stat.
 
 If you'll like for a choice to either increase or decrease a stat you need to specify it under each choice.
 
@@ -131,7 +131,7 @@ The stats will not be neither narrated nor displayed to the user.
 
 It's important to indent the "stat" so StoryTime recognizes this is a consecuence of a choice.
 
-### Conditionally displaying choices
+### Conditionally displaying choices.
 
 `Stats` can be used to conditionally narrate the choices on your story. Let's add this to your story as well. After the `ConfrontOgre` paragraph add:
 
@@ -154,7 +154,7 @@ It's important to indent the "stat" so StoryTime recognizes this is a consecuenc
 
 Notice that some of the options are not only conditional but they also affect the stats if selected as well.
 
-### The whole story
+### The whole story.
 
 Your story should look similar to this:
 
