@@ -196,14 +196,13 @@ namespace CoreBot.Dialogs.StorySelection
             var activity = context.Activity.CreateReply(text);
             activity.Speak = speak;
             activity.InputHint = InputHints.ExpectingInput;
-            activity.SuggestedActions = new SuggestedActions();
-            activity.SuggestedActions.Actions = new List<CardAction>();
 
+            List<CardAction> cardButtons = new List<CardAction>();
             foreach (var choice in choices)
             {
                 if (state.IsChoicePossible(choice.Conditions))
                 {
-                    activity.SuggestedActions.Actions.Add(new CardAction()
+                    cardButtons.Add(new CardAction()
                     {
                         Title = choice.Text,
                         Text = choice.Text,
@@ -213,6 +212,13 @@ namespace CoreBot.Dialogs.StorySelection
                     });
                 }
             }
+
+            var heroCard = new HeroCard()
+            {
+                Buttons = cardButtons
+            };
+
+            activity.Attachments.Add(heroCard.ToAttachment());
 
             return activity;
         }

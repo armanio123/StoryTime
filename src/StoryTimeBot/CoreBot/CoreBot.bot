@@ -1,26 +1,63 @@
 {
-  "name": "CoreBot",
-  "description": "",
-  "services": [
-    {
-      "type": "endpoint",
-      "id": "1",
-      "name": "development",
-      "appId": "",
-      "appPassword": "",
-      "endpoint": "http://localhost:3978/api/messages"
-    },
-	{
-		"type": "luis",
-		"name": "LuisBot",
-		"appId": "5a042454-96b6-478f-ae5d-a52244d23f2f",
-		"version": "0.1",
-		"authoringKey": "d8d1a5314d494c688e2920686ad43843",
-		"subscriptionKey": "d8d1a5314d494c688e2920686ad43843",
-		"region": "westus",
-		"id": "158"
-	}
-  ],
-  "padlock": "",
-  "version": "2.0"
+    "name": "CoreBot",
+    "description": "",
+    "services": [
+        {
+            "type": "abs",
+            "tenantId": "1da2970d-edfc-45aa-9bf3-f6f955d88a09",
+            "subscriptionId": "2ec83ca8-ff8c-4174-a7e6-fbb4519e2985",
+            "resourceGroup": "StoryTime",
+            "serviceName": "StoryTimeBot",
+            "name": "StoryTimeBot",
+            "id": "1",
+            "appId": "74a73cff-ce85-4bf8-887b-93395c349904"
+        },
+        {
+            "type": "blob",
+            "connectionString": "gCmiBE/qupD+sfzaDtoCmA==!7UHzLcInIZ/A2bv2qJft81NFda8EkgnkmJ69vzOQCxdRECLP+I6NUh+EgoRHnLTmmEnEOtVnExFCZBnPZK+g/vSJ2JvOxsZn8Zyev8yKkWFZbLviTZzcaRS83X8f8uy49AzZy1wbV1bhLFMI3cmFhJnujozaMIX864h88c2weRANUYkPpF5grHKmEctYUll2S+/qvf470mrYAdkNm2tu0lYChbKO/gUxTqlVX9Bs5w0=",
+            "tenantId": "1da2970d-edfc-45aa-9bf3-f6f955d88a09",
+            "subscriptionId": "2ec83ca8-ff8c-4174-a7e6-fbb4519e2985",
+            "resourceGroup": "StoryTime",
+            "serviceName": "storytimebot89ac",
+            "id": "2"
+        },
+        {
+            "type": "endpoint",
+            "appId": "",
+            "appPassword": "",
+            "endpoint": "http://localhost:3978/api/messages",
+            "name": "development",
+            "id": "3"
+        },
+        {
+            "type": "endpoint",
+            "appId": "74a73cff-ce85-4bf8-887b-93395c349904",
+            "appPassword": "ohlROTWVY4zq5Tx+C01NNg==!RaOySz6Gak6d5SDfE39eBzEVf977/O1vY9yFZvca2sU=",
+            "endpoint": "https://storytimebot.azurewebsites.net/api/messages",
+            "name": "production",
+            "id": "4"
+        },
+        {
+            "type": "appInsights",
+            "instrumentationKey": "evcdfO1jytsQSzfxQKc62A==!fkv5VkWWNixODo54AMSpUt16r428uwH1eIQG2e5YZD2p1sDRvP70hjeP/K/E+eNp",
+            "applicationId": "506eab03-14de-4472-aada-103cb7c70b14",
+            "apiKeys": {},
+            "tenantId": "1da2970d-edfc-45aa-9bf3-f6f955d88a09",
+            "subscriptionId": "2ec83ca8-ff8c-4174-a7e6-fbb4519e2985",
+            "resourceGroup": "StoryTime",
+            "serviceName": "StoryTimeBotmhvsym",
+            "id": "5"
+        },
+        {
+            "type": "luis",
+            "appId": "1e00b5ba-0d30-4414-bc48-a7135b5477aa",
+            "authoringKey": "WzsgeyR7eAGZOsoGQ66PbA==!ylvvah5jFUtakz8H9XQE90GuNu69te1IgmMLX/C535zILx+q40G/qh2SUrKL/YLl",
+            "version": "0.1",
+            "region": "westus",
+            "name": "BasicBotLuisApplication",
+            "id": "6"
+        }
+    ],
+    "padlock": "FuCxOm0b8EUPPwUrrwzkww==!mMYobAuNgkCJz4RF7NVFqPxQM6FN0cEisQ4PwfqrCPHY+UGn24Nmg8h5qnb+Pvgj",
+    "version": "2.0"
 }
