@@ -19,7 +19,7 @@ The first thing is creating a file with extension `.md` and adding a title. We'l
 by anonymous author.
 ```
 
-The first line `# The Ogre` will be recognized by StoryTime and narrated as is.
+The single `#` indicates this is the title. The line `The Ogre` will be recognized by StoryTime and narrated as is.
 
 ## Add a chapter.
 
@@ -36,7 +36,7 @@ You keep running away from the ogre but he's too fast for you. Tired and without
 You defend yourself with all your might and manage to defeat the ogre. Congratulations. 
 ```
 
-Notice the double `##` on each paragraph. This is important as it will define the start of a paragraph. StoryTime is not going to narrate or display this line. This line needs to be composed of only letters or numbers and start with another `#`. This is used as an identifier for the `Choices` explained below.
+Notice the double `##` on each title paragraph. This is important as it will define the start of a paragraph. StoryTime is not going to narrate or display this line. This line needs to be composed of only letters or numbers and the text should start with another `#`. This is used as an identifier for the `Choices` explained below.
 
 ## Performing choices.
 
@@ -76,7 +76,7 @@ What will happen on StoryTime?
 1. Cortana will launch by narrating the title and author.
 1. Followed by the first paragraph (`Chapter1`) and `Choices`.
 1. User will talk one of the choices. This doesn't need to be exact it can be a similar text to the desired choice. e.g. user says `run away`.
-1. The app will recognize the user's choice and prompt the identified action. e.g. After saying `run away` StoryTime will narrate the content of `Ending2`.
+1. The app will recognize the user's choice and prompt the identified action. e.g. After saying `run away` StoryTime will narrate the content of `Ending1`.
 
 # The Stats section. Advanced stuff.
 
