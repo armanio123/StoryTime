@@ -84,7 +84,7 @@ StoryTime is not only an app to display the user paragraphs and choices. It can 
 
 Adding `Stats` to your story will enable a more immersive experience. You can enable or disable certain actions depending on the previous choices. 
 
-For example, you could define a stat `hp` that will keep track of the plsyer's health. The choices the user selects can increase or reduce the `hp` stat, disabling certain actions when there's not enough `hp`.
+For example, you could define a stat `hp` that will keep track of the player's health. The choices the user selects can increase or reduce the `hp` stat, disabling certain actions when there's not enough `hp`.
 
 Let's modify our story to add this feature.
 
