@@ -13,12 +13,12 @@ With every step the scent of decay and death gets stronger. The cave is dark and
 Suddenly, you hear a noise right by your side, is sounds like heavy chains clanking. You barely see a shadowy figure resembling a human.
 
 ## Actions
-* [Say hello... Is somebody there?... Do you know how to get out of here?](#TheEnragedSkeleton)
+* [Would you get closer](#TheEnragedSkeleton)
   * hp: -3
-* [Approach the figure but slowly and very silently.](#TheSkeleton)
+* [or approach the figure but slowly and very silently](#TheSkeleton)
   * **skills: ["Move silently"]**
   * gear: +["rusty sword"]
-* [Screw that, I'm out of here.](#DeeperIntoTheCave)
+* [or run away](#DeeperIntoTheCave)
   * **skills: ["Sprint"]**
   * **endurance: 3**
   * endurance: -3
