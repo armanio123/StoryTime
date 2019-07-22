@@ -1,10 +1,10 @@
 # What's StoryTime?
 
-When I was a kid, I loved reading the Choose Your Own Adventure books, where you got to pick the plot to follow and where my character and decisions are part of the book.
+When I was a kid, I loved reading books and imagining me choosing the plot to follow, where my character and decisions where part of the book.
 
 With the rise of digital assistants, home devices, etc, it is now possible to live your own adventure through voice, with Cortana as your own personal narrator.
 
-The user decide the plot by using voice or typing the option. We have also created a simple text framework for anybody to create their own stories and share them with the world.
+The user decide the plot by using voice or typing the option. Also anybody can create their own stories and share them with the world using the simple this simple text framework.
 
 # Create your own story.
 
