@@ -4,7 +4,7 @@ by aaward@microsoft.com
 Hackathon 2019 live demo story
 
 ## #GreetingRoom
-You step under the last rotten support beam in the damp, rocky passage, and the walls open up into what remains of the staging area for the ore carts before they were loaded onto caravans for shipping to the great cities of the north. The broken and rusted remains of one of the carts leans against the wall to your right, half buried in rubble. The faint whistling of the wind passing the entrance of the mine behind you takes on a slightly deeper tone as it expands to fill this small chamber.
+You step under the final rotten support beam in the damp, rocky passage, and the walls open up into what remains of the staging area for the ore carts before they were loaded onto caravans for shipping to the great cities of the north. The broken and rusted remains of one of the carts leans against the wall to your right, half buried in rubble. The faint whistling of the wind passing the entrance of the mine behind you takes on a slightly deeper tone as it expands to fill this small chamber.
 
 The space itself extends about ten feet to either side from the passageway in which you now stand. The back wall, dimly lit but still visible, stands about twice as far from you as the width of the room. Four flimsy wooden pillars support a sagging frame above, one of which remains attached only at the top, with the bottom half broken away and laying on the smooth rock floor.
 
@@ -20,12 +20,12 @@ Dazed and unstable, it wobbles on its spindly legs, trying to get its bearings w
 
 ## Actions
 * [attack](#GreetingRoom0Attack)
-    * snivelsnot0killed: +["true"]
-    * loudnoisemade: +["true"]
+    * snivelsnot0killed:   +["true"]
+    * loudnoisemade:       +["true"]
 * [parley](#GreetingRoom0Parley)
-    * snivelsnot0spared: +["true"]
+    * snivelsnot0spared:   +["true"]
 * [withdraw](#GreetingRoom0Withdraw)
-    * snivelsnot0ignored: +["true"]
+    * snivelsnot0ignored:  +["true"]
 
 ## #GreetingRoom0Attack
 
@@ -37,4 +37,6 @@ Placeholder for parley with the goblin.
 
 ## #GreetingRoom0Withdraw
 
-Placeholder for withdrawing from the goblin.
+The pathetic creature is helpless and unarmed. You can always come back for the ears later you want to. You step away, leaving him whimpering in the corner.
+
+You stand next to the broken support pillar, beneath the low stone ceiling and the sagging wooden frame that supposedly holds it in place. Past the goblin to your left is the makeshift door you saw earlier in the back wall. On the other side of the room is a dark passageway leading to parts unknown. Behind you is the mine's entrance, through the corridor from which you entered.
