@@ -3,6 +3,8 @@ using BotService.Shared;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Parser.Entities;
@@ -15,7 +17,7 @@ namespace BotService.Dialogs
 {
     public class StorySelectionDialog : ComponentDialog
     {
-        private const string StoryId = "1";
+        private const string StoryId = "3";
 
         private const string StoryDialogId = "storyDialog";
         private const string EndOfStoryDialogId = "endOfStoryDialog";
@@ -31,9 +33,19 @@ namespace BotService.Dialogs
         private readonly MockApi api;
         private readonly StorySelectionAccessors accessors;
 
-        public StorySelectionDialog(ConversationState conversationState, MockApi api)
+        protected readonly IConfiguration _configuration;
+        protected readonly ILogger _logger;
+
+        public StorySelectionDialog(
+            IConfiguration configuration,
+            ILogger<StorySelectionDialog> logger,
+            ConversationState conversationState,
+            MockApi api)
             : base(nameof(StorySelectionDialog))
         {
+            this._configuration = configuration;
+            this._logger = logger;
+
             this.accessors = new StorySelectionAccessors(conversationState);
 
             this.api = api;
@@ -71,7 +83,7 @@ namespace BotService.Dialogs
             else
             {
                 var state = await this.accessors.StorySelectionState.GetAsync(stepContext.Context);
-                var text = $"{state.StorySection.Text} {string.Join(' ', state.StorySection.Choices.Select(x => x.Text))}";
+                var text = $"{state.StorySection.Text}";
                 var options = new PromptOptions
                 {
                     Prompt = CreateReply(state, stepContext.Context, text)
@@ -119,6 +131,9 @@ namespace BotService.Dialogs
         {
             var state = await this.accessors.StorySelectionState.GetAsync(promptContext.Context);
 
+            // TODO: Do something with Luis result
+            await LuisHelper.ExecuteLuisQuery(_configuration, _logger, promptContext.Context, cancellationToken);
+
             var selectedChoice = GetSelectedChoice(state, promptContext.Recognized.Value);
             if (selectedChoice == null) // selection was not recognized, prompt the question again.
             {
@@ -164,35 +179,13 @@ namespace BotService.Dialogs
 
             var activity = context.Activity.CreateReply();
             activity.Speak = text;
-            activity.InputHint = InputHints.IgnoringInput; // Assume there's no choices.
+            activity.InputHint = InputHints.AcceptingInput;
 
             activity.Text = isDebug == null || isDebug.Value
                  ? text
                  : string.Empty;
 
-            var choices = state.GetPossibleChoices();
-            if (choices.Any())
-            {
-                activity.InputHint = InputHints.ExpectingInput;
-
-                var card = new AdaptiveCard("1.0")
-                {
-                    Speak = string.Join(' ', choices.Select(x => x.Text))
-                };
-                card.Actions.AddRange(choices.Select(x => new AdaptiveSubmitAction
-                {
-                    Title = x.Text,
-                    Data = x.Text
-                }));
-
-                var attachment = new Attachment
-                {
-                    ContentType = "application/vnd.microsoft.card.adaptive",
-                    Content = JObject.FromObject(card)
-                };
-
-                activity.Attachments = new List<Attachment> { attachment };
-            }
+            activity.Properties = JObject.FromObject(new { stats = state.Stats });
 
             return activity;
         }

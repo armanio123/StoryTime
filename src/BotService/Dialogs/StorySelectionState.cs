@@ -1,4 +1,5 @@
-﻿using Parser.Entities;
+﻿using Parser;
+using Parser.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,9 +29,11 @@ namespace BotService.Dialogs
                 {
                     Stats.TryGetValue(effect.Key, out dynamic statsValue);
 
-                    if ((statsValue is int || statsValue is long) && effect.Value is int effectInt)
+                    if ((statsValue is int || statsValue is long) && effect.Value is string effectValue)
                     {
-                        int statsValueInt = (int)statsValue;
+                        var statsValueInt = (int)statsValue;
+                        var effectInt = RollParser.Roll(effectValue);
+
                         switch (effect.EffectType)
                         {
                             case EffectType.None:
@@ -96,13 +99,14 @@ namespace BotService.Dialogs
                 {
                     Stats.TryGetValue(condition.Key, out dynamic statsValue);
 
-
-                    if ((statsValue is int || statsValue is long) && condition.Value is int conditionInt)
+                    if ((statsValue is int || statsValue is long) && condition.Value is string)
                     {
-                        int statsValueInt = (int)statsValue;
+                        var statsValueInt = (int)statsValue;
+                        var conditionInt = RollParser.Roll(condition.Value);
+
                         if (statsValueInt < conditionInt)
                         {
-                            return false;
+                            return true;
                         }
                     }
                     else if (statsValue is string[] statsValueArray && condition.Value is string[] conditionArray)
@@ -111,7 +115,7 @@ namespace BotService.Dialogs
                         {
                             if (statsValueArray.FirstOrDefault(x => x == conditionArrItem) == null)
                             {
-                                return false;
+                                return true;
                             }
                         }
                     }

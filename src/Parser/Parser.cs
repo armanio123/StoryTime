@@ -14,7 +14,8 @@ namespace Parser
     public class MarkdownStoryParser
     {
         private static readonly string statKeyPattern = @"^ *?([^: ]+) *?:"; // Group 1 = key name.
-        private static readonly string counterStatPattern = $@"{statKeyPattern} *?([-+])?(\d+) *?$"; // Group 1 = key name. Group 2 = Sign, Group 3 = Value. 
+
+        private static readonly string counterStatPattern = $@"{statKeyPattern} *?([-+])?({RollParser.Pattern}) *?$"; // Group 1 = key name. Group 2 = Sign, Group 3 = Value. 
         private static readonly string flagStatPattern = $@"{statKeyPattern} *?([-+])?(\[.+\]) *?$"; // Group 1 = key name. Group 2 = Sign, Group 3 = Array.
 
         private readonly Regex counterStatRegex = new Regex(counterStatPattern, RegexOptions.IgnoreCase);
@@ -108,7 +109,7 @@ namespace Parser
 
         private string CleanContent(string text)
         {
-            if(string.IsNullOrWhiteSpace(text))
+            if (string.IsNullOrWhiteSpace(text))
             {
                 return string.Empty;
             }
@@ -160,7 +161,7 @@ namespace Parser
 
                 string content = GetBlockContent(paragraphBlock);
 
-                var (key, value, _) = GetStat(content);
+                var (key, value, _) = GetStat(content, true);
 
                 stats.Add(key, value);
             }
@@ -222,7 +223,7 @@ namespace Parser
             {
                 string content = GetBlockContent(paragraphBlock);
 
-                (string key, dynamic value, EffectType effectType) = GetStat(content);
+                (string key, dynamic value, EffectType effectType) = GetStat(content, false);
 
                 if (paragraphBlock.Inline.FirstChild is EmphasisInline) // Is a Condition
                 {
@@ -258,9 +259,9 @@ namespace Parser
             }
         }
 
-        private (string key, dynamic value, EffectType effectType) GetStat(string content)
+        private (string key, dynamic value, EffectType effectType) GetStat(string content, bool calculateValue)
         {
-            if (TryGetCounterStat(content, out string key, out dynamic value, out EffectType effectType) || TryGetFlagStat(content, out key, out value, out effectType))
+            if (TryGetCounterStat(content, calculateValue, out string key, out dynamic value, out EffectType effectType) || TryGetFlagStat(content, out key, out value, out effectType))
             {
                 return (key, value, effectType);
             }
@@ -285,18 +286,26 @@ namespace Parser
             return match.Success;
         }
 
-        private bool TryGetCounterStat(string content, out string key, out dynamic value, out EffectType effectType)
+        private bool TryGetCounterStat(string content, bool calculateValue, out string key, out dynamic value, out EffectType effectType)
         {
             key = null;
             value = null;
             effectType = EffectType.None;
 
-            Match match = counterStatRegex.Match(content);
+            var match = counterStatRegex.Match(content);
 
             if (match.Success)
             {
+                if(calculateValue)
+                {
+                    value = RollParser.Roll(match.Groups[3].Value);
+                }
+                else
+                {
+                    value = match.Groups[3].Value;
+                }
+
                 key = match.Groups[1].Value;
-                value = int.Parse(match.Groups[3].Value);
                 effectType = GetEffectType(match.Groups[2].Value);
             }
 
