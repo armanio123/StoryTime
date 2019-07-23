@@ -21,6 +21,7 @@ Dazed and unstable, it wobbles on its spindly legs, trying to get its bearings w
 ## Actions
 * [attack](#GreetingRoom0Attack)
     * snivelsnot0killed: +["true"]
+    * loudnoisemade: +["true"]
 * [parley](#GreetingRoom0Parley)
     * snivelsnot0spared: +["true"]
 * [withdraw](#GreetingRoom0Withdraw)
@@ -28,7 +29,7 @@ Dazed and unstable, it wobbles on its spindly legs, trying to get its bearings w
 
 ## #GreetingRoom0Attack
 
-Placeholder for killing the goblin.
+Without waiting for the creature to regain its composure and launch a counterattack, you reverse your swing and hack downwards on the return stroke, your sword easily cutting through the ragged leather clothing and parting the thick greenish skin of the goblins legs before clanging loudly against the stone wall. Badly wounded now, the goblin collapses to the dirty floor, clutching its bloody legs and whimpering loudly. A quick thrust up and into its torso causes the blubbering to fade away quickly, until the only sound remaining is the distant whistling of the wind outside and the blood slowly dripping from your blade into a puddle below.
 
 ## #GreetingRoom0Parley
 
