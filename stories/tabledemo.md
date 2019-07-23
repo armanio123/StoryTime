@@ -11,7 +11,7 @@ This is a demonstration of Cortana is my Dungeon Master. You will be taking on t
 * [skip to delay](#GreetingRoom0Delay0Return)
 
 ## #GreetingRoom
-You step under the final rotten support beam in the damp, rocky passage, and the walls open up into what remains of the staging area for the ore carts before they were loaded onto caravans for shipping to the great cities of the north. The broken and rusted remains of one of the carts leans against the wall to your right, half buried in rubble. The faint whistling of the wind passing the entrance of the mine behind you takes on a slightly deeper tone as it expands to fill this small chamber.
+You step beneath the final rotten support beam in the damp, rocky passage, and the walls open up into what remains of the staging area for the ore carts before they were loaded onto caravans for shipping to the great cities of the north. The broken and rusted remains of one of the carts leans against the wall to your right, half buried in rubble. The faint whistling of the wind passing the entrance of the mine behind you takes on a slightly deeper tone as it expands to fill this small chamber.
 
 The space itself extends about ten feet to either side from the passageway in which you now stand. The back wall, dimly lit but still visible, stands about twice as far from you as the width of the room. Four flimsy wooden pillars support a sagging frame above, one of which remains attached only at the top, with the bottom half broken away and laying on the smooth rock floor.
 
@@ -255,6 +255,8 @@ Placeholder for look at self. Say "continue" when ready.
 * [continue](#GreetingRoom0Delay0Return)
 
 ## #GreetingRoom0Delay0Return
+
+Placeholder for blank description.
 
 ## Actions
 * [attack](#GreetingRoom0Attack)
