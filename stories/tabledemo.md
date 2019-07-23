@@ -16,7 +16,7 @@ The vile creature is clearly a goblin; the citizens of Redlake have offered a ha
 
 Leaping across the room before the little brute is aware of your entry, you release your sword from its hip-sheath, and with the same motion, slash it across the monster's midsection. The goblin squeals in terror and flings itself backward into the corner, barely avoiding the tip of the blade, but knocking its head against the wall in the process.
 
-Dazed and unstable, it wobbles on its spindly legs, trying to get its bearings while cowering in anticipating of the next inevitable blow.
+Dazed and unstable, it wobbles on its spindly legs, trying to get its bearings while cowering in anticipation of the next inevitable blow.
 
 ## Actions
 * [attack](#GreetingRoom0Attack)
@@ -33,7 +33,7 @@ Without waiting for the creature to regain its composure and launch a counteratt
 
 ## #GreetingRoom0Parley
 
-Placeholder for parley with the goblin.
+Still holding your blade aloft and ready, you stare the beast in its big yellow eyes and growl threateningly. With a submissive whimper, it leans back against the corner and slumps slowly down to the floor, carefully watching your face the whole time. Making itself as small as possible, it wraps its spindly arms around its folded legs and quietly murmurs to itself in little high-pitched monosyllabic grunts.
 
 ## #GreetingRoom0Withdraw
 
