@@ -8,7 +8,7 @@ by Armando Aguirre and Hector Arriaga
 * gear: ["lighter"]
 
 ## Intro
-With every step the scent of decay and death gets stronger. The cave is dark and humid. How is that I always end in such places? -you wonder. You can still see natural light coming from some cracks on the wall, that gives you some sense of comfort. For the poorly lit places you can use your lighter, like you're doing right now.
+With every step, the scent of decay and death gets stronger. The cave is dark and humid. How is that I always end in such places? -you wonder. You can still see natural light reflecting off the walls, that gives you some sense of comfort. For the poorly lit places you can use your lighter, like you're doing right now.
 
 Suddenly, you hear a noise right by your side, is sounds like heavy chains clanking. You barely see a shadowy figure resembling a human.
 
