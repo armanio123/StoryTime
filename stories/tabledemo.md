@@ -26,6 +26,51 @@ Dazed and unstable, it wobbles on its spindly legs, trying to get its bearings w
     * snivelsnot0spared:   +["true"]
 * [withdraw](#GreetingRoom0Withdraw)
     * snivelsnot0ignored:  +["true"]
+* [look](#GreetingRoom0Delay0Look)
+    * snivelsnot0delay: 1
+* [look at beam](#GreetingRoom0Delay0Look0at0beam)
+    * snivelsnot0delay: 1
+* [look at passage](#GreetingRoom0Delay0Look0at0passage)
+    * snivelsnot0delay: 1
+* [look at walls](#GreetingRoom0Delay0Look0at0walls)
+    * snivelsnot0delay: 1
+* [look at room](#GreetingRoom0Delay0Look0at0room)
+    * snivelsnot0delay: 1
+* [look at pillars](#GreetingRoom0Delay0Look0at0pillars)
+    * snivelsnot0delay: 1
+* [look at frame](#GreetingRoom0Delay0Look0at0frame)
+    * snivelsnot0delay: 1
+* [look at broken pillar](#GreetingRoom0Delay0Look0at0brokenpillar)
+    * snivelsnot0delay: 1
+* [look at floor](#GreetingRoom0Delay0Look0at0floor)
+    * snivelsnot0delay: 1
+* [look at dark passageway](#GreetingRoom0Delay0Look0at0darkpassageway)
+    * snivelsnot0delay: 1
+* [look at door](#GreetingRoom0Delay0Look0at0door)
+    * snivelsnot0delay: 1
+* [look at opening](#GreetingRoom0Delay0Look0at0opening)
+    * snivelsnot0delay: 1
+* [look at stones](#GreetingRoom0Delay0Look0at0stones)
+    * snivelsnot0delay: 1
+* [look at goblin](#GreetingRoom0Delay0Look0at0goblin)
+    * snivelsnot0delay: 1
+* [look at ears](#GreetingRoom0Delay0Look0at0ears)
+    * snivelsnot0delay: 1
+* [look at sword](#GreetingRoom0Delay0Look0at0sword)
+    * snivelsnot0delay: 1
+* [look at sheath](#GreetingRoom0Delay0Look0at0sheath)
+    * snivelsnot0delay: 1
+* [look at midsection](#GreetingRoom0Delay0Look0at0midsection)
+    * snivelsnot0delay: 1
+* [look at corner](#GreetingRoom0Delay0Look0at0corner)
+    * snivelsnot0delay: 1
+* [look at tip](#GreetingRoom0Delay0Look0at0tip)
+    * snivelsnot0delay: 1
+* [look at head](#GreetingRoom0Delay0Look0at0head)
+    * snivelsnot0delay: 1
+* [look at legs](#GreetingRoom0Delay0Look0at0legs)
+    * snivelsnot0delay: 1
+* [look at self](#GreetingRoom0Delay0Look0at0self)
 
 ## #GreetingRoom0Attack
 
@@ -40,3 +85,198 @@ Still holding your blade aloft and ready, you stare the beast in its big yellow 
 The pathetic creature is helpless and unarmed. You can always come back for the ears later you want to. You step away, leaving him whimpering in the corner.
 
 You stand next to the broken support pillar, beneath the low stone ceiling and the sagging wooden frame that supposedly holds it in place. Past the goblin to your left is the makeshift door you saw earlier in the back wall. On the other side of the room is a dark passageway leading to parts unknown. Behind you is the mine's entrance, through the corridor from which you entered.
+
+## #GreetingRoom0Delay0Look
+
+Placeholder for look. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0beam
+
+Placeholder for look at beam. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0passage
+
+Placeholder for look at passage. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0walls
+
+Placeholder for look at walls. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0room
+
+Placeholder for look at room. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0pillars
+
+Placeholder for look at pillars. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0frame
+
+Placeholder for look at frame. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0brokenpillar
+
+Placeholder for look at broken pillar. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0floor
+
+Placeholder for look at floor. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0darkpassageway
+
+Placeholder for look at dark passageway. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0door
+
+Placeholder for look at door. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0opening
+
+Placeholder for look at opening. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0stones
+
+Placeholder for look at stones. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0goblin
+
+Placeholder for look at goblin. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0ears
+
+Placeholder for look at ears. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0sword
+
+Placeholder for look at sword. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0sheath
+
+Placeholder for look at sheath. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0midsection
+
+Placeholder for look at midsection. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0corner
+
+Placeholder for look at corner. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0tip
+
+Placeholder for look at tip. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0head
+
+Placeholder for look at head. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0legs
+
+Placeholder for look at legs. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Look0at0self
+
+Placeholder for look at self. Say "continue" when ready.
+
+* [continue](#GreetingRoom0Delay0Return)
+
+## #GreetingRoom0Delay0Return
+
+## Actions
+* [attack](#GreetingRoom0Attack)
+    * snivelsnot0killed:   +["true"]
+    * loudnoisemade:       +["true"]
+* [parley](#GreetingRoom0Parley)
+    * snivelsnot0spared:   +["true"]
+* [withdraw](#GreetingRoom0Withdraw)
+    * snivelsnot0ignored:  +["true"]
+* [look](#GreetingRoom0Delay0Look)
+    * snivelsnot0delay: +1
+* [look at beam](#GreetingRoom0Delay0Look0at0beam)
+    * snivelsnot0delay: +1
+* [look at passage](#GreetingRoom0Delay0Look0at0passage)
+    * snivelsnot0delay: +1
+* [look at walls](#GreetingRoom0Delay0Look0at0walls)
+    * snivelsnot0delay: +1
+* [look at room](#GreetingRoom0Delay0Look0at0room)
+    * snivelsnot0delay: +1
+* [look at pillars](#GreetingRoom0Delay0Look0at0pillars)
+    * snivelsnot0delay: +1
+* [look at frame](#GreetingRoom0Delay0Look0at0frame)
+    * snivelsnot0delay: +1
+* [look at broken pillar](#GreetingRoom0Delay0Look0at0brokenpillar)
+    * snivelsnot0delay: +1
+* [look at floor](#GreetingRoom0Delay0Look0at0floor)
+    * snivelsnot0delay: +1
+* [look at dark passageway](#GreetingRoom0Delay0Look0at0darkpassageway)
+    * snivelsnot0delay: +1
+* [look at door](#GreetingRoom0Delay0Look0at0door)
+    * snivelsnot0delay: +1
+* [look at opening](#GreetingRoom0Delay0Look0at0opening)
+    * snivelsnot0delay: +1
+* [look at stones](#GreetingRoom0Delay0Look0at0stones)
+    * snivelsnot0delay: +1
+* [look at goblin](#GreetingRoom0Delay0Look0at0goblin)
+    * snivelsnot0delay: +1
+* [look at ears](#GreetingRoom0Delay0Look0at0ears)
+    * snivelsnot0delay: +1
+* [look at sword](#GreetingRoom0Delay0Look0at0sword)
+    * snivelsnot0delay: +1
+* [look at sheath](#GreetingRoom0Delay0Look0at0sheath)
+    * snivelsnot0delay: +1
+* [look at midsection](#GreetingRoom0Delay0Look0at0midsection)
+    * snivelsnot0delay: +1
+* [look at corner](#GreetingRoom0Delay0Look0at0corner)
+    * snivelsnot0delay: +1
+* [look at tip](#GreetingRoom0Delay0Look0at0tip)
+    * snivelsnot0delay: +1
+* [look at head](#GreetingRoom0Delay0Look0at0head)
+    * snivelsnot0delay: +1
+* [look at legs](#GreetingRoom0Delay0Look0at0legs)
+    * snivelsnot0delay: +1
+* [look at self](#GreetingRoom0Delay0Look0at0self)
+    * snivelsnot0delay: +1
