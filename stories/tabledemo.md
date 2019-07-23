@@ -3,6 +3,13 @@ by aaward@microsoft.com
 
 Hackathon 2019 live demo story
 
+## #Startup
+This is a demonstration of Cortana is my Dungeon Master. You will be taking on the role of Caladon, a warrior and mercenary in a medieval fantasy world. Your travels have brought you to the town of Redlake, where the locals have offered you a reward for clearing out the nearby abandoned mine of certain undesirable creatures. Are you ready to begin?
+
+## Actions
+* [yes](#GreetingRoom)
+* [skip to delay](#GreetingRoom0Delay0Return)
+
 ## #GreetingRoom
 You step under the final rotten support beam in the damp, rocky passage, and the walls open up into what remains of the staging area for the ore carts before they were loaded onto caravans for shipping to the great cities of the north. The broken and rusted remains of one of the carts leans against the wall to your right, half buried in rubble. The faint whistling of the wind passing the entrance of the mine behind you takes on a slightly deeper tone as it expands to fill this small chamber.
 
