@@ -31,7 +31,8 @@ namespace BotService.Shared
                 //file1 = client.OpenRead("https://raw.githubusercontent.com/armanio123/StoryTime/master/stories/sample.md");
                 //file2 = client.OpenRead("https://raw.githubusercontent.com/armanio123/StoryTime/master/stories/sample2.md");
                 //file3 = client.OpenRead("https://raw.githubusercontent.com/armanio123/StoryTime/CortanaIsMyDM/stories/sample3.md");
-                file4 = client.OpenRead("https://raw.githubusercontent.com/armanio123/StoryTime/CortanaIsMyDM/stories/tabledemo.md");
+                file4 = client.OpenRead(@"file:///C:\workroom\scm\git\StoryTime\stories/tabledemo.md");
+                //("https://raw.githubusercontent.com/armanio123/StoryTime/CortanaIsMyDM/stories/tabledemo.md");
             }
 
             var parser = new MarkdownStoryParser();

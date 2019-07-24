@@ -172,6 +172,14 @@ namespace BotService.Dialogs
 
             // If there's no choice, use LUIS to try to get the best result.
             var luisResult = await LuisHelper.ExecuteLuisQuery(_configuration, _logger, promptContext.Context, cancellationToken);
+            
+            // aaward log testing
+            _logger.LogInformation($"LUIS result: {luisResult}");
+            var selection = availableChoices.SingleOrDefault(x => string.Equals(x.Text, luisResult, StringComparison.OrdinalIgnoreCase));
+            //_logger.LogInformation($"Thing one: {x.Text}");
+            _logger.LogInformation($"Selection: {selection}");
+            _logger.LogInformation($"Available : {availableChoices}");
+            
             return availableChoices.SingleOrDefault(x => string.Equals(x.Text, luisResult, StringComparison.OrdinalIgnoreCase));
         }
 

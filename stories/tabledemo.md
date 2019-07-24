@@ -8,41 +8,41 @@ Hackathon 2019 live demo story
 * initialized: ["true"]
 
 ## #Node_00_Startup
-  CDM 7.24.1003
+
+  CDM 7.24.1325
+
+  OK, I am ready. Have you ever played dungeons and dragons before?
 
 ## Actions
-* [yes](#GreetingRoom)
-* [skip to delay](#GreetingRoom0Delay0Return)
+* [respond_affirmative](#N_00_Affirmative)
+* [respond_negatory](#N_00_Negatory)
+* [metacommand_repeat](#Node_00_Startup)
 
-## #GreetingRoom
-Placeholder for greeting room.
 
-## Actions
-* [attack](#GreetingRoom0Attack)
-    * snivelsnot0killed:   +["true"]
-    * loudnoisemade:       +["true"]
-* [parley](#GreetingRoom0Parley)
-    * snivelsnot0spared:   +["true"]
-* [withdraw](#GreetingRoom0Withdraw)
-    * snivelsnot0ignored:  +["true"]
+## #N_00_Affirmative
 
-## #GreetingRoom0Attack
-Placeholder for greeting room attack.
+  Excellent.
 
-## #GreetingRoom0Parley
-Placeholder for greeting room parlay.
-
-## #GreetingRoom0Withdraw
-Placeholder for greeting room withdraw.
-
-## #GreetingRoom0Delay0Return
-Placeholder for blank description.
+  As we play, you can speak to me in the first person, as you take on the role of your character in the story. Just speak naturally, I have a language understanding AI that helps me figure out what you are trying to do, and the more you experiment, the better I will get at it. for example, if you say "I want to examine the broken pillar more closely" or "I throw a rock right at the goblin's face", I will understand what you mean.
 
 ## Actions
-* [attack](#GreetingRoom0Attack)
-    * snivelsnot0killed:   +["true"]
-    * loudnoisemade:       +["true"]
-* [parley](#GreetingRoom0Parley)
-    * snivelsnot0spared:   +["true"]
-* [withdraw](#GreetingRoom0Withdraw)
-    * snivelsnot0ignored:  +["true"]
+* [continue](#Node_99_End)
+* [metacommand_repeat](#N_00_Affirmative)
+
+  
+## #N_00_Negatory
+
+  D and D is a role playing game. It’s kind of like reading a story where you control the main character, and the story changes in response to your actions. You tell me what you want to do, and I describe the things that you see and hear around you.
+
+  Are you ready to begin, or would you like some more explanation?
+
+## Actions
+* [respond_affirmative](#Node_99_End)
+* [respond_negatory](#Node_99_End)
+* [explanation](#Node_99_End)
+* [metacommand_repeat](#N_00_Negatory)
+
+  
+## #Node_99_End
+
+  You may now return to the real world.
