@@ -333,3 +333,7 @@ ASALocalRun/
 obj/**
 bin/**
 runtimes/**
+
+# Aaron's custom stuff
+appconfig.json
+MockApi.cs
