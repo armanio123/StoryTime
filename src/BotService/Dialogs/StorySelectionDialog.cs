@@ -98,9 +98,19 @@ namespace BotService.Dialogs
             var state = await this.accessors.StorySelectionState.GetAsync(stepContext.Context);
             state.StorySection = api.GetSectionById(StoryId, stepContext.Result.ToString());
 
-            while (string.IsNullOrWhiteSpace(state.StorySection.Text)) // Is a linked state
+            // loop until we don't met any triggers or are in a linked state
+            var choice = state.GetChoiceMetTrigger();
+            while (choice != null || string.IsNullOrWhiteSpace(state.StorySection.Text))
             {
-                state.StorySection = api.GetSectionById(StoryId, state.GetPossibleChoices().Single().SectionKey);
+                // Choice was met by linked state
+                if (choice == null)
+                {
+                    choice = state.GetPossibleChoices().Single();
+                }
+
+                state.StorySection = api.GetSectionById(StoryId, choice.SectionKey);
+                state.ApplyEffectsToStats(choice.Effects);
+                choice = state.GetChoiceMetTrigger();
             }
 
             // Assume is the end of the story unless there's more choices.
