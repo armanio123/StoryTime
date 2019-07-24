@@ -3,8 +3,12 @@ by aaward@microsoft.com
 
 Hackathon 2019 live demo story
 
-## #Startup
-CDM 7.24.0929
+
+## Stats
+* initialized: ["true"]
+
+## #Node_00_Startup
+  CDM 7.24.1003
 
 ## Actions
 * [yes](#GreetingRoom)
