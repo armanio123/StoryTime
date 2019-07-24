@@ -127,8 +127,7 @@ namespace Parser
                 return string.Empty;
             }
 
-            string result = text.Trim();
-            return result.Last() == '.' ? result : result + '.';
+            return text.Trim();
         }
 
         private bool TryAddDictionary<TKey, TValue>(Dictionary<TKey, TValue> dictionary, TKey key, TValue value)
