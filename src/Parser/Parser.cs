@@ -78,7 +78,9 @@ namespace Parser
                             var paragraphs = ParseContent(markdownDocument, nextBlockIndex);
                             string content = CleanContent(paragraphs);
 
-                            var choices = ParseChoices(markdownDocument, nextBlockIndex + paragraphs.Count() + 1);
+                            var nextBlock = SkipComments(markdownDocument, nextBlockIndex + paragraphs.Count() + 1);
+
+                            var choices = ParseChoices(markdownDocument, nextBlock);
 
                             Section section = new Section
                             {
@@ -99,6 +101,17 @@ namespace Parser
             return story;
         }
 
+        private int SkipComments(MarkdownDocument markdownDocument, int index)
+        {
+            // All html blocks are considered comments, even if they are not `<!-- -->`
+            while (index < markdownDocument.Count() && markdownDocument[index] is HtmlBlock)
+            {
+                index++;
+            }
+
+            return index;
+        }
+
         private string CleanContent(IEnumerable<string> texts)
         {
             string dirty = string.Join("\n", texts);
@@ -114,8 +127,7 @@ namespace Parser
                 return string.Empty;
             }
 
-            string result = text.Trim();
-            return result.Last() == '.' ? result : result + '.';
+            return text.Trim();
         }
 
         private bool TryAddDictionary<TKey, TValue>(Dictionary<TKey, TValue> dictionary, TKey key, TValue value)
@@ -192,26 +204,28 @@ namespace Parser
 
             string sectionKey = paragraphBlock.Inline.Descendants<LinkInline>().FirstOrDefault().Url;
 
-            var (conditions, effects) = ParseStatEffects(listItemBlock);
+            var (conditions, effects, triggers) = ParseStatEffects(listItemBlock);
 
             return new Choice
             {
                 Conditions = conditions,
                 Effects = effects,
+                SectionKey = sectionKey,
                 Text = text,
-                SectionKey = sectionKey
+                Triggers = triggers
             };
         }
 
-        private (List<StatEffect> conditions, List<StatEffect> effects) ParseStatEffects(ListItemBlock listItemBlock)
+        private (List<StatEffect> conditions, List<StatEffect> effects, List<StatEffect> triggers) ParseStatEffects(ListItemBlock listItemBlock)
         {
             var conditions = new List<StatEffect>();
             var effects = new List<StatEffect>();
+            var triggers = new List<StatEffect>();
 
-            // No effects or conditions.
+            // No effects, conditions, triggers.
             if (listItemBlock.Count < 2 || !(listItemBlock[1] is ListBlock listBlock))
             {
-                return (conditions, effects);
+                return (conditions, effects, triggers);
             }
 
             foreach (ParagraphBlock paragraphBlock in listBlock.Descendants<ParagraphBlock>())
@@ -220,7 +234,9 @@ namespace Parser
 
                 (string key, dynamic value, EffectType effectType) = GetStat(content, false);
 
-                if (paragraphBlock.Inline.FirstChild is EmphasisInline) // Is a Condition
+                var emphasis = paragraphBlock.Inline.FirstChild as EmphasisInline;
+
+                if (emphasis != null && emphasis.IsDouble) // Is a Condition
                 {
                     conditions.Add(new StatEffect
                     {
@@ -229,7 +245,16 @@ namespace Parser
                         Value = value
                     });
                 }
-                else
+                else if (emphasis != null && !emphasis.IsDouble) // Is a Trigger
+                {
+                    triggers.Add(new StatEffect
+                    {
+                        EffectType = effectType,
+                        Key = key,
+                        Value = value
+                    });
+                }
+                else // Is an effect
                 {
                     effects.Add(new StatEffect
                     {
@@ -240,7 +265,7 @@ namespace Parser
                 }
             }
 
-            return (conditions, effects);
+            return (conditions, effects, triggers);
         }
 
         private void AddStats(Dictionary<string, dynamic> stats, Dictionary<string, dynamic> newStats)
