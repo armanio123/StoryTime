@@ -4,21 +4,22 @@ by aaward@microsoft.com
 Hackathon 2019 live demo story
 
 ## #Startup
-CDM 7.24.0529
+CDM 7.24.0533
 Node: Startup
 
 ## Actions
 * [welcome](#Welcome)
-* [test underscore](#Test_Underscore)
+* [test comments markdown](#Test_Comments_Markdown)
 
-## #Test_Underscore
-Node: test underscore.
+## #Test_Comments_Markdown
+Node: test comments markdown.
+[//]: # (This is a markdown comment.)
 
 ## Actions
 * [continue](#Startup)
 
 ## #Welcome
-This is a demonstration of Cortana is my Dungeon Master v7.24.0529. You will be taking on the role of Caladon, a warrior and mercenary in a medieval fantasy world. Your travels have brought you to the town of Redlake, where the locals have offered you a reward for clearing out the nearby abandoned mine of certain undesirable creatures. Are you ready to begin?
+This is a demonstration of Cortana is my Dungeon Master v7.24.0533. You will be taking on the role of Caladon, a warrior and mercenary in a medieval fantasy world. Your travels have brought you to the town of Redlake, where the locals have offered you a reward for clearing out the nearby abandoned mine of certain undesirable creatures. Are you ready to begin?
 
 ## Actions
 * [yes](#GreetingRoom)
