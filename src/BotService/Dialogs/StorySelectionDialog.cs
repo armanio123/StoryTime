@@ -139,7 +139,7 @@ namespace BotService.Dialogs
             var selectedChoice = await GetSelectedChoice(state, promptContext, cancellationToken);
             if (selectedChoice == null) // selection was not recognized, prompt the question again.
             {
-                var reply = CreateReply(state, promptContext.Context, string.Join(' ', state.StorySection.Choices.Select(x => x.Text)));
+                var reply = CreateReply(state, promptContext.Context, "I don't understand what you are trying to do, please try again. You may also ask me to repeat the description.");
                 await promptContext.Context.SendActivityAsync(reply);
 
                 return false;
