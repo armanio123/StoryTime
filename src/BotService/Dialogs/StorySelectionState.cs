@@ -106,7 +106,7 @@ namespace BotService.Dialogs
 
                         if (statsValueInt < conditionInt)
                         {
-                            return true;
+                            return false;
                         }
                     }
                     else if (statsValue is string[] statsValueArray && condition.Value is string[] conditionArray)
@@ -115,7 +115,7 @@ namespace BotService.Dialogs
                         {
                             if (statsValueArray.FirstOrDefault(x => x == conditionArrItem) == null)
                             {
-                                return true;
+                                return false;
                             }
                         }
                     }

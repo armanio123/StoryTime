@@ -14,7 +14,7 @@ namespace BotService.Shared
 {
     public static class LuisHelper
     {
-        public static async Task ExecuteLuisQuery(IConfiguration configuration, ILogger logger, ITurnContext turnContext, CancellationToken cancellationToken)
+        public static async Task<string> ExecuteLuisQuery(IConfiguration configuration, ILogger logger, ITurnContext turnContext, CancellationToken cancellationToken)
         {
             try
             {
@@ -30,11 +30,12 @@ namespace BotService.Shared
                 // The actual call to LUIS
                 var recognizerResult = await recognizer.RecognizeAsync(turnContext, cancellationToken);
 
-                var (intent, score) = recognizerResult.GetTopScoringIntent();
+                return recognizerResult.GetTopScoringIntent().intent;
             }
             catch (Exception e)
             {
                 logger.LogWarning($"LUIS Exception: {e.Message} Check your LUIS configuration.");
+                return null;
             }
         }
     }

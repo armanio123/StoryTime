@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Parser.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -17,7 +18,7 @@ namespace BotService.Dialogs
 {
     public class StorySelectionDialog : ComponentDialog
     {
-        private const string StoryId = "3";
+        private const string StoryId = "4";
 
         private const string StoryDialogId = "storyDialog";
         private const string EndOfStoryDialogId = "endOfStoryDialog";
@@ -30,7 +31,7 @@ namespace BotService.Dialogs
             "New story"
         };
 
-        private readonly MockApi api;
+        private MockApi api;
         private readonly StorySelectionAccessors accessors;
 
         protected readonly IConfiguration _configuration;
@@ -39,16 +40,13 @@ namespace BotService.Dialogs
         public StorySelectionDialog(
             IConfiguration configuration,
             ILogger<StorySelectionDialog> logger,
-            ConversationState conversationState,
-            MockApi api)
+            ConversationState conversationState)
             : base(nameof(StorySelectionDialog))
         {
             this._configuration = configuration;
             this._logger = logger;
 
             this.accessors = new StorySelectionAccessors(conversationState);
-
-            this.api = api;
 
             AddDialog(new WaterfallDialog(StoryDialogId, new WaterfallStep[]{
                 InitializeStateAsync,
@@ -65,6 +63,8 @@ namespace BotService.Dialogs
 
         private async Task<DialogTurnResult> InitializeStateAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
+            this.api = new MockApi();
+
             var context = await this.accessors.StorySelectionState.GetAsync(stepContext.Context, () => null);
             if (context == null || StringSimilarity.IsSimilar(stepContext.Context.Activity.Text, this.DefaultOptions[1])) // new story
             {
@@ -97,6 +97,11 @@ namespace BotService.Dialogs
         {
             var state = await this.accessors.StorySelectionState.GetAsync(stepContext.Context);
             state.StorySection = api.GetSectionById(StoryId, stepContext.Result.ToString());
+
+            while (string.IsNullOrWhiteSpace(state.StorySection.Text)) // Is a linked state
+            {
+                state.StorySection = api.GetSectionById(StoryId, state.GetPossibleChoices().Single().SectionKey);
+            }
 
             // Assume is the end of the story unless there's more choices.
             var dialogId = EndOfStoryDialogId;
@@ -131,10 +136,7 @@ namespace BotService.Dialogs
         {
             var state = await this.accessors.StorySelectionState.GetAsync(promptContext.Context);
 
-            // TODO: Do something with Luis result
-            await LuisHelper.ExecuteLuisQuery(_configuration, _logger, promptContext.Context, cancellationToken);
-
-            var selectedChoice = GetSelectedChoice(state, promptContext.Recognized.Value);
+            var selectedChoice = await GetSelectedChoice(state, promptContext, cancellationToken);
             if (selectedChoice == null) // selection was not recognized, prompt the question again.
             {
                 var reply = CreateReply(state, promptContext.Context, string.Join(' ', state.StorySection.Choices.Select(x => x.Text)));
@@ -151,9 +153,9 @@ namespace BotService.Dialogs
             return true;
         }
 
-        private Choice GetSelectedChoice(StorySelectionState state, string input)
+        private async Task<Choice> GetSelectedChoice(StorySelectionState state, PromptValidatorContext<string> promptContext, CancellationToken cancellationToken)
         {
-            var cleanedInput = input?.Trim();
+            var cleanedInput = promptContext.Recognized.Value?.Trim();
             if (string.IsNullOrEmpty(cleanedInput))
             {
                 return null;
@@ -168,8 +170,9 @@ namespace BotService.Dialogs
                 return availableChoices.ElementAt(choiceIndex);
             }
 
-            // The user input was not recognized as any valid option.
-            return null;
+            // If there's no choice, use LUIS to try to get the best result.
+            var luisResult = await LuisHelper.ExecuteLuisQuery(_configuration, _logger, promptContext.Context, cancellationToken);
+            return availableChoices.SingleOrDefault(x => string.Equals(x.Text, luisResult, StringComparison.OrdinalIgnoreCase));
         }
 
         private Activity CreateReply(StorySelectionState state, ITurnContext context, string text)
@@ -179,7 +182,7 @@ namespace BotService.Dialogs
 
             var activity = context.Activity.CreateReply();
             activity.Speak = text;
-            activity.InputHint = InputHints.AcceptingInput;
+            activity.InputHint = InputHints.ExpectingInput;
 
             activity.Text = isDebug == null || isDebug.Value
                  ? text

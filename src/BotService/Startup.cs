@@ -56,7 +56,7 @@ namespace BotService
             // Create the StorySeleciton state. (Used in this bot's Dialog implementation.)
             services.AddSingleton<StorySelectionState>();
 
-            services.AddSingleton<MockApi>();
+            //services.AddSingleton<MockApi>();
 
             // The Dialog that will be run by the bot.
             services.AddSingleton<StorySelectionDialog>();

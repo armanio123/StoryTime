@@ -135,12 +135,7 @@ namespace Parser
             // Concat all paragraphs, skip the blocks already parsed.
             var paragraphs = markdownDocument.Skip(index).TakeWhile(x => x is ParagraphBlock).Select(GetBlockContent);
 
-            if (!paragraphs.Any())
-            {
-                throw new Exception("Error parsing a Section. No text was found."); //TODO: Improve error handling
-            }
-
-            return paragraphs;
+            return paragraphs.Any() ? paragraphs : Enumerable.Empty<string>();
         }
 
         private Dictionary<string, dynamic> ParseStats(MarkdownDocument markdownDocument, int index)
@@ -296,7 +291,7 @@ namespace Parser
 
             if (match.Success)
             {
-                if(calculateValue)
+                if (calculateValue)
                 {
                     value = RollParser.Roll(match.Groups[3].Value);
                 }
