@@ -78,7 +78,9 @@ namespace Parser
                             var paragraphs = ParseContent(markdownDocument, nextBlockIndex);
                             string content = CleanContent(paragraphs);
 
-                            var choices = ParseChoices(markdownDocument, nextBlockIndex + paragraphs.Count() + 1);
+                            var nextBlock = SkipComments(markdownDocument, nextBlockIndex + paragraphs.Count() + 1);
+
+                            var choices = ParseChoices(markdownDocument, nextBlock);
 
                             Section section = new Section
                             {
@@ -97,6 +99,17 @@ namespace Parser
             }
 
             return story;
+        }
+
+        private int SkipComments(MarkdownDocument markdownDocument, int index)
+        {
+            // All html blocks are considered comments, even if they are not `<!-- -->`
+            while (index < markdownDocument.Count() && markdownDocument[index] is HtmlBlock)
+            {
+                index++;
+            }
+
+            return index;
         }
 
         private string CleanContent(IEnumerable<string> texts)
