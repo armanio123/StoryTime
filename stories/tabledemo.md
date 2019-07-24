@@ -4,7 +4,7 @@ by aaward@microsoft.com
 Hackathon 2019 live demo story
 
 ## #Startup
-CDM 7.24.0929
+CDM 7.24.0935
 
 ## Actions
 * [yes](#GreetingRoom)
