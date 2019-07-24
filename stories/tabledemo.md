@@ -10,13 +10,14 @@ Hackathon 2019 live demo story
 
 ## #Node_00_Startup
 
-  CDM 7.24.0833
+  CDM 7.24.0853
 
   OK, I am ready. Have you ever played dungeons and dragons before?
 
 ## Actions
   * [respond_affirmative] (#N_00_Affirmative)
   * [respond_negatory]    (#N_00_Negatory)
+  * [metacommand_repeat]  (#Node_00_Startup)
 
 
 ## #N_00_Affirmative
@@ -26,7 +27,8 @@ Hackathon 2019 live demo story
   As we play, you can speak to me in the first person, as you take on the role of your character in the story. Just speak naturally, I have a language understanding AI that helps me figure out what you are trying to do, and the more you experiment, the better I will get at it. for example, if you say “I want to examine the broken pillar more closely" or “I throw a rock right at the goblin's face", I will understand what you mean.
 
 ## Actions
-  * [continue] (#Node_99_End)
+  * [continue]            (#Node_99_End)
+  * [metacommand_repeat]  (#N_00_Affirmative)
 
   
 ## #N_00_Negatory
@@ -39,6 +41,7 @@ Hackathon 2019 live demo story
   * [respond_affirmative] (#Node_99_End)
   * [respond_negatory]    (#Node_99_End)
   * [explanation]         (#Node_99_End)
+  * [metacommand_repeat]  (#N_00_Negatory)
 
   
 ## #Node_99_End
