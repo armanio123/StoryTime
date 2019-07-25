@@ -185,13 +185,6 @@ namespace BotService.Dialogs
 
             var availableChoices = state.GetPossibleChoices();
 
-            // If there's a valid index, we have recognized the user input and returned the selection.
-            var choiceIndex = StringSimilarity.GetIndex(cleanedInput, availableChoices.Select(x => x.Text));
-            if (choiceIndex >= 0 && choiceIndex < availableChoices.Count())
-            {
-                return availableChoices.ElementAt(choiceIndex);
-            }
-
             // If there's no choice, use LUIS to try to get the best result.
             var luisResult = await LuisHelper.ExecuteLuisQuery(_configuration, _logger, promptContext.Context, cancellationToken);
             
@@ -202,7 +195,20 @@ namespace BotService.Dialogs
             _logger.LogInformation($"Selection: {selection}");
             _logger.LogInformation($"Available : {availableChoices}");
             
-            return availableChoices.SingleOrDefault(x => string.Equals(x.Text, luisResult, StringComparison.OrdinalIgnoreCase));
+            var luisChoice =  availableChoices.SingleOrDefault(x => string.Equals(x.Text, luisResult, StringComparison.OrdinalIgnoreCase));
+            if(luisChoice != null)
+            {
+                return luisChoice;
+            }
+
+            // If there's a valid index, we have recognized the user input and returned the selection.
+            var choiceIndex = StringSimilarity.GetIndex(cleanedInput, availableChoices.Select(x => x.Text));
+            if (choiceIndex >= 0 && choiceIndex < availableChoices.Count())
+            {
+                return availableChoices.ElementAt(choiceIndex);
+            }
+
+            return null;
         }
 
         private Activity CreateReply(StorySelectionState state, ITurnContext context, string text)

@@ -178,51 +178,51 @@ Dazed and unstable, it wobbles on its spindly legs, trying to get its bearings w
     * snivelsnot0spared:   +["true"]
 * [withdraw](#GreetingRoom0Withdraw)
     * snivelsnot0ignored:  +["true"]
-* [look](#GreetingRoom0Delay0Look)
+* [use_sense_sight](#GreetingRoom0Delay0Look)
     * snivelsnot0delay: 1
-* [look at beam](#GreetingRoom0Delay0Look0at0beam)
+* [use_sense_sight beam](#GreetingRoom0Delay0Look0at0beam)
     * snivelsnot0delay: 1
-* [look at passage](#GreetingRoom0Delay0Look0at0passage)
+* [use_sense_sight passage](#GreetingRoom0Delay0Look0at0passage)
     * snivelsnot0delay: 1
-* [look at walls](#GreetingRoom0Delay0Look0at0walls)
+* [use_sense_sight walls](#GreetingRoom0Delay0Look0at0walls)
     * snivelsnot0delay: 1
-* [look at room](#GreetingRoom0Delay0Look0at0room)
+* [use_sense_sight room](#GreetingRoom0Delay0Look0at0room)
     * snivelsnot0delay: 1
-* [look at pillars](#GreetingRoom0Delay0Look0at0pillars)
+* [use_sense_sight pillars](#GreetingRoom0Delay0Look0at0pillars)
     * snivelsnot0delay: 1
-* [look at frame](#GreetingRoom0Delay0Look0at0frame)
+* [use_sense_sight frame](#GreetingRoom0Delay0Look0at0frame)
     * snivelsnot0delay: 1
-* [look at broken pillar](#GreetingRoom0Delay0Look0at0brokenpillar)
+* [use_sense_sight broken pillar](#GreetingRoom0Delay0Look0at0brokenpillar)
     * snivelsnot0delay: 1
-* [look at floor](#GreetingRoom0Delay0Look0at0floor)
+* [use_sense_sight floor](#GreetingRoom0Delay0Look0at0floor)
     * snivelsnot0delay: 1
-* [look at dark passageway](#GreetingRoom0Delay0Look0at0darkpassageway)
+* [use_sense_sight dark passageway](#GreetingRoom0Delay0Look0at0darkpassageway)
     * snivelsnot0delay: 1
-* [look at door](#GreetingRoom0Delay0Look0at0door)
+* [use_sense_sight door](#GreetingRoom0Delay0Look0at0door)
     * snivelsnot0delay: 1
-* [look at opening](#GreetingRoom0Delay0Look0at0opening)
+* [use_sense_sight opening](#GreetingRoom0Delay0Look0at0opening)
     * snivelsnot0delay: 1
-* [look at stones](#GreetingRoom0Delay0Look0at0stones)
+* [use_sense_sight stones](#GreetingRoom0Delay0Look0at0stones)
     * snivelsnot0delay: 1
-* [look at goblin](#GreetingRoom0Delay0Look0at0goblin)
+* [use_sense_sight goblin](#GreetingRoom0Delay0Look0at0goblin)
     * snivelsnot0delay: 1
-* [look at ears](#GreetingRoom0Delay0Look0at0ears)
+* [use_sense_sight ears](#GreetingRoom0Delay0Look0at0ears)
     * snivelsnot0delay: 1
-* [look at sword](#GreetingRoom0Delay0Look0at0sword)
+* [use_sense_sight sword](#GreetingRoom0Delay0Look0at0sword)
     * snivelsnot0delay: 1
-* [look at sheath](#GreetingRoom0Delay0Look0at0sheath)
+* [use_sense_sight sheath](#GreetingRoom0Delay0Look0at0sheath)
     * snivelsnot0delay: 1
-* [look at midsection](#GreetingRoom0Delay0Look0at0midsection)
+* [use_sense_sight midsection](#GreetingRoom0Delay0Look0at0midsection)
     * snivelsnot0delay: 1
-* [look at corner](#GreetingRoom0Delay0Look0at0corner)
+* [use_sense_sight corner](#GreetingRoom0Delay0Look0at0corner)
     * snivelsnot0delay: 1
-* [look at tip](#GreetingRoom0Delay0Look0at0tip)
+* [use_sense_sight tip](#GreetingRoom0Delay0Look0at0tip)
     * snivelsnot0delay: 1
-* [look at head](#GreetingRoom0Delay0Look0at0head)
+* [use_sense_sight head](#GreetingRoom0Delay0Look0at0head)
     * snivelsnot0delay: 1
-* [look at legs](#GreetingRoom0Delay0Look0at0legs)
+* [use_sense_sight legs](#GreetingRoom0Delay0Look0at0legs)
     * snivelsnot0delay: 1
-* [look at self](#GreetingRoom0Delay0Look0at0self)
+* [use_sense_sight self](#GreetingRoom0Delay0Look0at0self)
 
 ## #GreetingRoom0Attack
 
@@ -387,49 +387,49 @@ Placeholder for blank description.
     * snivelsnot0spared:   +["true"]
 * [withdraw](#GreetingRoom0Withdraw)
     * snivelsnot0ignored:  +["true"]
-* [look](#GreetingRoom0Delay0Look)
+* [use_sense_sight](#GreetingRoom0Delay0Look)
     * snivelsnot0delay: +1
-* [look at beam](#GreetingRoom0Delay0Look0at0beam)
+* [use_sense_sight beam](#GreetingRoom0Delay0Look0at0beam)
     * snivelsnot0delay: +1
-* [look at passage](#GreetingRoom0Delay0Look0at0passage)
+* [use_sense_sight passage](#GreetingRoom0Delay0Look0at0passage)
     * snivelsnot0delay: +1
-* [look at walls](#GreetingRoom0Delay0Look0at0walls)
+* [use_sense_sight walls](#GreetingRoom0Delay0Look0at0walls)
     * snivelsnot0delay: +1
-* [look at room](#GreetingRoom0Delay0Look0at0room)
+* [use_sense_sight room](#GreetingRoom0Delay0Look0at0room)
     * snivelsnot0delay: +1
-* [look at pillars](#GreetingRoom0Delay0Look0at0pillars)
+* [use_sense_sight pillars](#GreetingRoom0Delay0Look0at0pillars)
     * snivelsnot0delay: +1
-* [look at frame](#GreetingRoom0Delay0Look0at0frame)
+* [use_sense_sight frame](#GreetingRoom0Delay0Look0at0frame)
     * snivelsnot0delay: +1
-* [look at broken pillar](#GreetingRoom0Delay0Look0at0brokenpillar)
+* [use_sense_sight broken pillar](#GreetingRoom0Delay0Look0at0brokenpillar)
     * snivelsnot0delay: +1
-* [look at floor](#GreetingRoom0Delay0Look0at0floor)
+* [use_sense_sight floor](#GreetingRoom0Delay0Look0at0floor)
     * snivelsnot0delay: +1
-* [look at dark passageway](#GreetingRoom0Delay0Look0at0darkpassageway)
+* [use_sense_sight dark passageway](#GreetingRoom0Delay0Look0at0darkpassageway)
     * snivelsnot0delay: +1
-* [look at door](#GreetingRoom0Delay0Look0at0door)
+* [use_sense_sight door](#GreetingRoom0Delay0Look0at0door)
     * snivelsnot0delay: +1
-* [look at opening](#GreetingRoom0Delay0Look0at0opening)
+* [use_sense_sight opening](#GreetingRoom0Delay0Look0at0opening)
     * snivelsnot0delay: +1
-* [look at stones](#GreetingRoom0Delay0Look0at0stones)
+* [use_sense_sight stones](#GreetingRoom0Delay0Look0at0stones)
     * snivelsnot0delay: +1
-* [look at goblin](#GreetingRoom0Delay0Look0at0goblin)
+* [use_sense_sight goblin](#GreetingRoom0Delay0Look0at0goblin)
     * snivelsnot0delay: +1
-* [look at ears](#GreetingRoom0Delay0Look0at0ears)
+* [use_sense_sight ears](#GreetingRoom0Delay0Look0at0ears)
     * snivelsnot0delay: +1
-* [look at sword](#GreetingRoom0Delay0Look0at0sword)
+* [use_sense_sight sword](#GreetingRoom0Delay0Look0at0sword)
     * snivelsnot0delay: +1
-* [look at sheath](#GreetingRoom0Delay0Look0at0sheath)
+* [use_sense_sight sheath](#GreetingRoom0Delay0Look0at0sheath)
     * snivelsnot0delay: +1
-* [look at midsection](#GreetingRoom0Delay0Look0at0midsection)
+* [use_sense_sight midsection](#GreetingRoom0Delay0Look0at0midsection)
     * snivelsnot0delay: +1
-* [look at corner](#GreetingRoom0Delay0Look0at0corner)
+* [use_sense_sight corner](#GreetingRoom0Delay0Look0at0corner)
     * snivelsnot0delay: +1
-* [look at tip](#GreetingRoom0Delay0Look0at0tip)
+* [use_sense_sight tip](#GreetingRoom0Delay0Look0at0tip)
     * snivelsnot0delay: +1
-* [look at head](#GreetingRoom0Delay0Look0at0head)
+* [use_sense_sight head](#GreetingRoom0Delay0Look0at0head)
     * snivelsnot0delay: +1
-* [look at legs](#GreetingRoom0Delay0Look0at0legs)
+* [use_sense_sight legs](#GreetingRoom0Delay0Look0at0legs)
     * snivelsnot0delay: +1
-* [look at self](#GreetingRoom0Delay0Look0at0self)
+* [use_sense_sight self](#GreetingRoom0Delay0Look0at0self)
     * snivelsnot0delay: +1

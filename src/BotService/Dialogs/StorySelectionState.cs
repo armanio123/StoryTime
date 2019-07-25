@@ -32,7 +32,7 @@ namespace BotService.Dialogs
             {
                 if (!Stats.ContainsKey(effect.Key))
                 {
-                    if (effect.Value is int || effect.Value is long)
+                    if (effect.Value is string)
                     {
                         Stats.Add(effect.Key, 0);
                     }
