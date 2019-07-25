@@ -20,7 +20,7 @@ Hackathon 2019 live demo story
 
 ## #Node_Startup_Yes
 
-  Excellent. So just talk to me as if I were a human dungeon master and I'll understand what you mean. Are you ready to continue?
+  Excellent. So just talk to me as if I were a human dungeon master and I will understand what you mean. Are you ready to continue?
 
 ## Actions
 * [respond_affirmative](#Node_Root_Introduction)
