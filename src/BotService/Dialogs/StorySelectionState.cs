@@ -3,6 +3,7 @@ using Parser.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BotService.Dialogs
@@ -15,10 +16,14 @@ namespace BotService.Dialogs
 
         public Dictionary<string, dynamic> Stats { get; set; }
 
+        public StringBuilder PrependBuilder { get; set; }
+
         public StorySelectionState(Section section, Dictionary<string, dynamic> startingStats)
         {
             StorySection = section;
             Stats = startingStats;
+
+            PrependBuilder = new StringBuilder();
         }
 
         public void ApplyEffectsToStats(IEnumerable<StatEffect> effects)

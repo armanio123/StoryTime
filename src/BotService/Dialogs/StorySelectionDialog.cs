@@ -61,6 +61,7 @@ namespace BotService.Dialogs
             AddDialog(new TextPrompt(OptionPromptId, ValidateOptionAsync));
         }
 
+        // Run once per session. Initializes the sotry and other stuff.
         private async Task<DialogTurnResult> InitializeStateAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             this.api = new MockApi();
@@ -74,6 +75,7 @@ namespace BotService.Dialogs
             return await stepContext.NextAsync();
         }
 
+        // Posts the text and then starts ValidateOptionAsync once the user has selected an option.
         private async Task<DialogTurnResult> StoryQuestionAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             if (stepContext.Result is string optionString && !string.IsNullOrWhiteSpace(optionString))
@@ -83,7 +85,9 @@ namespace BotService.Dialogs
             else
             {
                 var state = await this.accessors.StorySelectionState.GetAsync(stepContext.Context);
-                var text = $"{state.StorySection.Text}";
+                var text = $"{state.PrependBuilder.ToString()}{state.StorySection.Text}";
+                state.PrependBuilder.Clear();
+
                 var options = new PromptOptions
                 {
                     Prompt = CreateReply(state, stepContext.Context, text)
@@ -93,6 +97,7 @@ namespace BotService.Dialogs
             }
         }
 
+        // Gets the response from the user. Goes to StoryQuestionAsync once done.
         private async Task<DialogTurnResult> StoryQuestionLoopAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             var state = await this.accessors.StorySelectionState.GetAsync(stepContext.Context);
@@ -106,6 +111,12 @@ namespace BotService.Dialogs
                 if (choice == null)
                 {
                     choice = state.GetPossibleChoices().Single();
+                }
+
+                // Add to the state for prepending when responding to the user
+                if (!string.IsNullOrWhiteSpace(state.StorySection.Text))
+                {
+                    state.PrependBuilder.Append(state.StorySection.Text + "\n\n");
                 }
 
                 state.StorySection = api.GetSectionById(StoryId, choice.SectionKey);
@@ -129,7 +140,8 @@ namespace BotService.Dialogs
         private async Task<DialogTurnResult> StoryEndAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             var state = await this.accessors.StorySelectionState.GetAsync(stepContext.Context);
-            var text = $"{state.StorySection.Text}\n\n{EndingText}";
+            var text = $"{state.PrependBuilder.ToString()}{state.StorySection.Text}\n\n{EndingText}";
+            state.PrependBuilder.Clear();
 
             var reply = CreateReply(state, stepContext.Context, text);
 
