@@ -9,7 +9,7 @@ Hackathon 2019 live demo story
 
 ## #Node_Temp
 
-The massive stone door grinds shut behind you as you step into the musty tomb. With a resounding thud, it settles into place, Sending out a little puffs of dust and seeming very much like it never intends to move again. As the air within settles, the cobwebs cease their fluttering and lay still, hanging in torn fragments along the ceiling.
+You watch carefully, ready to fire your lightning bolt spell at the first sign of danger. The shadowy figure of Harrow the Filch slips quietly around behind the sarcophagus, poking about in the dark. Suddenly, the distinctive "clunk" of a pressure plate broadcasts her failure to the entire room. The engraved lid of the sarcophagus is pushed upward from within; you see the pale, dead hands of its occupant shoving it aside.
 
 ## Actions
 * [continue](#Node_00_Startup)
