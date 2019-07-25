@@ -7,6 +7,13 @@ Hackathon 2019 live demo story
 ## Stats
 * initialized: ["true"]
 
+## #Node_Temp
+
+Welcome back, Caledon the Grim. Your party is awaiting your return. Are you ready to join them?
+
+## Actions
+* [respond_affirmative](#N_00_Affirmative)
+
 ## #Node_00_Startup
 
   CDM 7.24.1608
