@@ -12,7 +12,7 @@ Hackathon 2019 live demo story
 Welcome back, Caledon the Grim. Your party is awaiting your return. Are you ready to join them?
 
 ## Actions
-* [respond_affirmative](#N_00_Affirmative)
+* [continue](#Node_00_Startup)
 
 ## #Node_00_Startup
 
