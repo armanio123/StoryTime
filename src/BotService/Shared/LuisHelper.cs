@@ -30,7 +30,10 @@ namespace BotService.Shared
                 // The actual call to LUIS
                 var recognizerResult = await recognizer.RecognizeAsync(turnContext, cancellationToken);
 
-                return recognizerResult.GetTopScoringIntent().intent;
+                var append = recognizerResult.Entities.ToObject<dynamic>().noun?[0].ToString();
+                var intent = recognizerResult.GetTopScoringIntent().intent;
+
+                return intent + (append != null ? $" {append}" : "");
             }
             catch (Exception e)
             {
