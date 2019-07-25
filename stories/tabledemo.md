@@ -9,7 +9,7 @@ Hackathon 2019 live demo story
 
 ## #Node_Temp
 
-Welcome back, Caledon the Grim. Your party is awaiting your return. Are you ready to join them?
+The massive stone door grinds shut behind you as you step into the musty tomb. With a resounding thud, it settles into place, Sending out a little puffs of dust and seeming very much like it never intends to move again. As the air within settles, the cobwebs cease their fluttering and lay still, hanging in torn fragments along the ceiling.
 
 ## Actions
 * [continue](#Node_00_Startup)
