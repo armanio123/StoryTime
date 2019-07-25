@@ -7,16 +7,9 @@ Hackathon 2019 live demo story
 ## Stats
 * initialized: ["true"]
 
-## #Node_Temp
-
-You watch carefully, ready to fire your lightning bolt spell at the first sign of danger. The shadowy figure of Harrow the Filch slips quietly around behind the sarcophagus, poking about in the dark. Suddenly, the distinctive "clunk" of a pressure plate broadcasts her failure to the entire room. The engraved lid of the sarcophagus is pushed upward from within; you see the pale, dead hands of its occupant shoving it aside.
-
-## Actions
-* [continue](#Node_00_Startup)
-
 ## #Node_00_Startup
 
-  CDM 7.24.1608
+  CDM 7.25.1122
 
   OK, I am ready. Have you ever played dungeons and dragons before?
 
