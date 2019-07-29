@@ -169,7 +169,7 @@ namespace BotService.Dialogs
                         var statsValueInt = (int)statsValue;
                         var conditionInt = RollParser.Roll(condition.Value);
 
-                        if (statsValueInt > conditionInt)
+                        if (statsValueInt >= conditionInt)
                         {
                             return true;
                         }

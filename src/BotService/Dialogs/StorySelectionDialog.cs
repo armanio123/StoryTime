@@ -104,25 +104,31 @@ namespace BotService.Dialogs
             state.StorySection = api.GetSectionById(StoryId, stepContext.Result.ToString());
 
             // loop until we don't met any triggers or are in a linked state
-            var choice = state.GetChoiceMetTrigger();
-            while (choice != null || string.IsNullOrWhiteSpace(state.StorySection.Text))
+            Choice choice;
+            do
             {
-                // Choice was met by linked state
-                if (choice == null)
-                {
-                    choice = state.GetPossibleChoices().Single();
-                }
-
-                // Add to the state for prepending when responding to the user
-                if (!string.IsNullOrWhiteSpace(state.StorySection.Text))
-                {
-                    state.PrependBuilder.Append(state.StorySection.Text + "\n\n");
-                }
-
-                state.StorySection = api.GetSectionById(StoryId, choice.SectionKey);
-                state.ApplyEffectsToStats(choice.Effects);
                 choice = state.GetChoiceMetTrigger();
-            }
+
+                // Choice was met by linked state
+                var possibleChoices = state.GetPossibleChoices();
+                if (choice == null && string.IsNullOrWhiteSpace(state.StorySection.Text) && possibleChoices.Count() == 1)
+                {
+                    choice = possibleChoices.Single();
+                }
+
+                // If there's a choice (should be single by now), apply to stats, continue to next section and prepend text.
+                if (choice != null)
+                {
+                    // Add to the state for prepending when responding to the user
+                    if (!string.IsNullOrWhiteSpace(state.StorySection.Text))
+                    {
+                        state.PrependBuilder.Append(state.StorySection.Text + "\n\n");
+                    }
+
+                    state.StorySection = api.GetSectionById(StoryId, choice.SectionKey);
+                    state.ApplyEffectsToStats(choice.Effects);
+                }
+            } while (choice != null);
 
             // Assume is the end of the story unless there's more choices.
             var dialogId = EndOfStoryDialogId;
@@ -187,16 +193,16 @@ namespace BotService.Dialogs
 
             // If there's no choice, use LUIS to try to get the best result.
             var luisResult = await LuisHelper.ExecuteLuisQuery(_configuration, _logger, promptContext.Context, cancellationToken);
-            
+
             // aaward log testing
             _logger.LogInformation($"LUIS result: {luisResult}");
             var selection = availableChoices.SingleOrDefault(x => string.Equals(x.Text, luisResult, StringComparison.OrdinalIgnoreCase));
             //_logger.LogInformation($"Thing one: {x.Text}");
             _logger.LogInformation($"Selection: {selection}");
             _logger.LogInformation($"Available : {availableChoices}");
-            
-            var luisChoice =  availableChoices.SingleOrDefault(x => string.Equals(x.Text, luisResult, StringComparison.OrdinalIgnoreCase));
-            if(luisChoice != null)
+
+            var luisChoice = availableChoices.SingleOrDefault(x => string.Equals(x.Text, luisResult, StringComparison.OrdinalIgnoreCase));
+            if (luisChoice != null)
             {
                 return luisChoice;
             }
